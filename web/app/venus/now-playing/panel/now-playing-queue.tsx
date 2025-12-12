@@ -12,6 +12,7 @@
  * You should have received a copy of the GNU Affero General Public License
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
+
 import { IconSymbol } from "@/app/components/icon/icon-symbol"
 import { TrackCoverArtwork } from "@/app/venus/components/cover-artwork/track-cover-artwork"
 import { NowPlayingQueueEntry } from "@/app/venus/now-playing/panel/now-playing-queue-entry"

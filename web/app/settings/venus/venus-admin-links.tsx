@@ -12,6 +12,7 @@
  * You should have received a copy of the GNU Affero General Public License
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
+
 import { ensureAdmin } from "@/app/auth/action-guards"
 import { SettingsSideLink } from "@/app/settings/components/settings-side-link"
 

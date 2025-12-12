@@ -12,6 +12,7 @@
  * You should have received a copy of the GNU Affero General Public License
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
+
 import { ensureLoggedIn } from "@/app/auth/action-guards"
 import { IconSymbol } from "@/app/components/icon/icon-symbol"
 import { ScrollArea } from "@/app/components/scroll-area"
@@ -49,7 +50,7 @@ const HomePage = async () => {
                             </Link>
                             <Link
                                 className="flex w-28 flex-col items-center gap-1 bg-gray-900 px-4 py-3 font-medium text-gray-50 hover:bg-gray-800 active:bg-gray-700"
-                                href="/venus/artists"
+                                href="/settings/general"
                             >
                                 <IconSymbol
                                     className="text-gray-200"

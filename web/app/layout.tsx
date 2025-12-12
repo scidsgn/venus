@@ -12,6 +12,7 @@
  * You should have received a copy of the GNU Affero General Public License
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
+
 import { setupClients } from "@/apis/client-setup"
 import { GeneralSans } from "@/app/fonts/general-sans/generalSans"
 import { Header } from "@/app/header/header"

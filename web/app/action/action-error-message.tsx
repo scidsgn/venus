@@ -12,6 +12,7 @@
  * You should have received a copy of the GNU Affero General Public License
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
+
 import { ActionErrorMapper, ActionOutcome } from "@/app/action/action-types"
 import { DefaultActionErrorComponents } from "@/app/action/default-action-error-components"
 import { ReactNode } from "react"

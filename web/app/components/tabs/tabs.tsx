@@ -12,6 +12,7 @@
  * You should have received a copy of the GNU Affero General Public License
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
+
 import { cx } from "@/app/cva.config"
 import { Content, List, Root, Trigger } from "@radix-ui/react-tabs"
 import { Children, ComponentProps, ReactElement, ReactNode } from "react"

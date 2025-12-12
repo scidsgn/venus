@@ -12,6 +12,7 @@
  * You should have received a copy of the GNU Affero General Public License
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
+
 import { AccountDropdown } from "@/app/header/account-dropdown/account-dropdown"
 import { AppPicker } from "@/app/header/app-picker"
 import { HeaderSlot } from "@/app/header/header-context"

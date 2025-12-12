@@ -12,6 +12,7 @@
  * You should have received a copy of the GNU Affero General Public License
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
+
 import { useAudioContext } from "@/app/venus/playback/audio-context"
 import { usePlayer } from "@/app/venus/playback/player-context"
 import { useResizeObserver } from "@mantine/hooks"

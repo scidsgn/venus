@@ -12,6 +12,7 @@
  * You should have received a copy of the GNU Affero General Public License
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
+
 import { adminPage } from "@/app/auth/admin-page"
 import { Callout } from "@/app/components/callout/callout"
 import { LrclibSectionContainer } from "@/app/settings/venus/external/lyrics/lrclib-section-container"

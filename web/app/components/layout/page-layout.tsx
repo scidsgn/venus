@@ -12,6 +12,7 @@
  * You should have received a copy of the GNU Affero General Public License
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
+
 import { ScrollArea } from "@/app/components/scroll-area"
 import { cx } from "@/app/cva.config"
 import { HTMLAttributes } from "react"

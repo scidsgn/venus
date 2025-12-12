@@ -12,6 +12,7 @@
  * You should have received a copy of the GNU Affero General Public License
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
+
 import { useAccentStyle } from "@/app/components/accent/accent-provider"
 import { Button, LinkButton } from "@/app/components/button/button"
 import { TextLink } from "@/app/components/link/text-link"

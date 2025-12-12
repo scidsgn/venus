@@ -12,6 +12,7 @@
  * You should have received a copy of the GNU Affero General Public License
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
+
 import { db } from "@/apis/db"
 import { RefreshToken } from "@/apis/prisma/client"
 import { getUserById } from "@/app/auth/db"

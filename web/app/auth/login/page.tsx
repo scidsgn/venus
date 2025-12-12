@@ -12,6 +12,7 @@
  * You should have received a copy of the GNU Affero General Public License
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
+
 import { ensureLoggedIn } from "@/app/auth/action-guards"
 import { countAdmins } from "@/app/auth/count-users"
 import { AdminForm } from "@/app/auth/login/admin-form"

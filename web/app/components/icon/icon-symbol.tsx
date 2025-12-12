@@ -12,6 +12,7 @@
  * You should have received a copy of the GNU Affero General Public License
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
+
 import { IconType } from "@/app/components/icon/icon-type"
 import { cx } from "@/app/cva.config"
 

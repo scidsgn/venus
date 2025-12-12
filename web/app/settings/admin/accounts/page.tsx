@@ -12,6 +12,7 @@
  * You should have received a copy of the GNU Affero General Public License
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
+
 import { adminPage } from "@/app/auth/admin-page"
 import { NewUserSection } from "@/app/settings/admin/accounts/new-user/new-user-section"
 import { UsersSection } from "@/app/settings/admin/accounts/users/users-section"

@@ -12,6 +12,7 @@
  * You should have received a copy of the GNU Affero General Public License
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
+
 import { ScanDto, VenusErrorCode } from "@/apis/venus"
 import { actionFailed } from "@/app/action/action"
 import { ActionOutcome, ActionResultWithData } from "@/app/action/action-types"

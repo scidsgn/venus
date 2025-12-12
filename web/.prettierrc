@@ -1,4 +1,12 @@
 {
+    "overrides": [
+        {
+            "files": ["*.tsx", "*.ts"],
+            "options": {
+                "parser": "babel-ts"
+            }
+        }
+    ],
     "plugins": [
         "@trivago/prettier-plugin-sort-imports",
         "prettier-plugin-prisma",
