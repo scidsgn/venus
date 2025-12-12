@@ -137,6 +137,8 @@ export async function register(
     await emitCookies(cookies, newUser.id)
 }
 
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 function verifyOtp(otp: string, secret: string): boolean {
+    // TODO
     return false
 }

@@ -21,10 +21,8 @@ import {
     PlayerPlaybackState,
     usePlayer,
 } from "@/app/venus/playback/player-context"
-import { usePathname } from "next/navigation"
 
 export const NowPlayingContainer = () => {
-    const pathname = usePathname()
     const track = usePlaybackQueue((state) => state.currentTrack?.track)
     const { playbackState } = usePlayer()
 

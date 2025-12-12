@@ -39,7 +39,7 @@ export async function loginAction(
         if (result === false) {
             return actionErrorOf(UserActionError.invalidCredentials)
         }
-    } catch (error) {
+    } catch {
         return ActionOutcome.unknownFailure
     }
 

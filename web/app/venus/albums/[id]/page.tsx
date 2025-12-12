@@ -95,7 +95,7 @@ const AlbumPage = async ({ params }: { params: Promise<{ id: string }> }) => {
 
                     {album.discs.map((disc) => (
                         <div key={disc.id} className="flex flex-col gap-0.5">
-                            {disc.tracks.map((track, i) => (
+                            {disc.tracks.map((track) => (
                                 <TracklistItem
                                     key={track.id}
                                     track={{

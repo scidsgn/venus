@@ -54,7 +54,7 @@ export async function GET(
 
     try {
         return fetch(proxyRequest)
-    } catch (_e) {
+    } catch {
         return new Response("", { status: 500 })
     }
 }

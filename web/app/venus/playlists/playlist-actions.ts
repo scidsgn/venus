@@ -59,9 +59,8 @@ export async function addTrackToPlaylistAction(
             track_id: trackId,
         },
     })
-    const result = actionFromResponse(response, error?.code)
 
-    return result
+    return actionFromResponse(response, error?.code)
 }
 
 export async function deleteTrackFromPlaylistAction(

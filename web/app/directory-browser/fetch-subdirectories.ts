@@ -43,7 +43,7 @@ export async function fetchSubdirectories(path: string) {
         )
 
         return actionDataOf(subDirs.sort())
-    } catch (error) {
+    } catch {
         return ActionOutcome.unknownFailure
     }
 }

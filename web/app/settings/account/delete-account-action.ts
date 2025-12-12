@@ -45,7 +45,7 @@ export async function deleteAccountAction() {
         if (count !== 1) {
             return ActionOutcome.unknownFailure
         }
-    } catch (_error) {
+    } catch {
         return ActionOutcome.unknownFailure
     }
 

@@ -66,7 +66,7 @@ export function decodeAuthJwt(token: string): JwtPayload | null {
         }
 
         return payload
-    } catch (_) {
+    } catch {
         return null
     }
 }

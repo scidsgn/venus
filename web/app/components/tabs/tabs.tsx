@@ -61,4 +61,5 @@ type TabProps = {
     children: ReactNode
 }
 
-export const Tab = (props: TabProps) => null
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
+export const Tab = (_: TabProps) => null

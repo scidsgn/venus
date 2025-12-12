@@ -24,7 +24,6 @@ import { useEffect, useMemo, useRef, useState } from "react"
 
 const binCount = 1024
 const binGap = 0
-const peakDecay = 0.997
 const logBins = false
 
 export const VisualizationBars = () => {

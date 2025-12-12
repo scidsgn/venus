@@ -59,7 +59,7 @@ const AlbumsPage = async () => {
                 <h1 className="text-4xl font-semibold">Albums</h1>
             </PageSidebar>
             <PageContent className="flex flex-col gap-1">
-                {letters.map((letter, i) => (
+                {letters.map((letter) => (
                     <Fragment key={letter}>
                         <div className="sticky top-0 grid size-8 place-items-center bg-gray-500 text-xl font-semibold text-gray-950">
                             {letter}

@@ -52,7 +52,7 @@ export async function getUsers() {
                 canDelete: user.externalId !== me.id,
             })),
         )
-    } catch (error) {}
+    } catch {}
 
     return ActionOutcome.unknownFailure
 }
@@ -73,7 +73,7 @@ export async function createUserAction(userName: string) {
             return actionErrorOf(UserActionError.userNameAlreadyTaken)
         }
 
-        const user = await db.user.create({
+        await db.user.create({
             data: {
                 userName,
                 role: "MEMBER",
@@ -85,7 +85,7 @@ export async function createUserAction(userName: string) {
         revalidatePath("/settings/admin/accounts")
 
         return ActionOutcome.ok
-    } catch (error) {}
+    } catch {}
 
     return ActionOutcome.unknownFailure
 }
@@ -112,7 +112,7 @@ export async function setUserRoleAction(userId: string, role: UserRole) {
         revalidatePath("/settings/admin/accounts")
 
         return ActionOutcome.ok
-    } catch (error) {}
+    } catch {}
 
     return ActionOutcome.unknownFailure
 }
@@ -139,7 +139,7 @@ export async function resetUserPasswordAction(userId: string) {
         revalidatePath("/settings/admin/accounts")
 
         return ActionOutcome.ok
-    } catch (error) {}
+    } catch {}
 
     return ActionOutcome.unknownFailure
 }
@@ -166,7 +166,7 @@ export async function deleteUserAction(userId: string) {
         revalidatePath("/settings/admin/accounts")
 
         return ActionOutcome.ok
-    } catch (error) {}
+    } catch {}
 
     return ActionOutcome.unknownFailure
 }
