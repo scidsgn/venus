@@ -25,7 +25,7 @@ services:
       JWT_PUBLIC_KEY_PATH: /run/secrets/auth-public-key
       REDIS_HOSTNAME: redis
       REDIS_PORT: 6379
-      WORKER_COUNT: 3
+      WORKER_COUNT: ${VENUS_WORKER_COUNT}
     volumes:
       - venus-tmp:/etc/venus/data
       - ${MEDIA_FOLDER_PATH}:/etc/venus/media
