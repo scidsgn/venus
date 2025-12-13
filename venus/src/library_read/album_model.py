@@ -56,7 +56,7 @@ class AlbumTrackDto(BaseModel):
 
     artwork: CoverArtDto | None
 
-    track_number: int
+    track_number: str
 
     @staticmethod
     def from_entity(track: Track):

@@ -12,6 +12,7 @@
 #  along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
 import music_tag
+from music_tag import AudioFile
 
 from src.metadata.extract_features import extract_features
 from src.metadata.extract_settings import ExtractMetadataSettings
@@ -28,20 +29,20 @@ def extract_metadata_from_file(file_path: str, settings: ExtractMetadataSettings
     try:
         music_file = music_tag.load_file(file_path)
 
-        title_features = extract_features(music_file["tracktitle"].value, settings)
-        artist_features = extract_features(music_file["artist"].value, settings)
+        title_features = extract_features(music_file["tracktitle"].first, settings)
+        artist_features = extract_features(music_file["artist"].first, settings)
 
-        album_title = music_file["album"].value
-        album_artists = music_file["albumartist"].value
-        disc_number = music_file["discnumber"].value
-        track_number = music_file["tracknumber"].value
+        album_title = music_file["album"].first
+        album_artists = music_file["albumartist"].first
+        disc_number = music_file["discnumber"].first
+        track_number = get_track_number(music_file)
 
         album = (
             MetadataAlbum(
                 title=album_title,
                 artists=artists_from_list(split_artists(album_artists, settings)),
                 artwork=music_file["artwork"].first if music_file["artwork"] else None,
-                release_year=music_file["year"].value if music_file["year"] else None,
+                release_year=music_file["year"].first if music_file["year"] else None,
             )
             if album_title and album_artists
             else None
@@ -55,9 +56,9 @@ def extract_metadata_from_file(file_path: str, settings: ExtractMetadataSettings
 
         return MetadataTrack(
             file_path=file_path,
-            duration=music_file["#length"].value,
+            duration=music_file["#length"].first,
             title=title_features.actual_value,
-            release_year=music_file["year"].value,
+            release_year=music_file["year"].first,
             artists=artists_from_list(
                 split_artists(artist_features.actual_value, settings)
             ),
@@ -74,6 +75,15 @@ def extract_metadata_from_file(file_path: str, settings: ExtractMetadataSettings
 
     except NotImplementedError:
         pass
+
+
+def get_track_number(music_file: AudioFile) -> str | None:
+    # TODO: this might need extra logic for handling funky tags
+    raw_track_number = music_file.get("tracknumber", typeless=True)
+    if raw_track_number is None:
+        return None
+
+    return raw_track_number.first
 
 
 def artists_from_list(artists: list[str]):

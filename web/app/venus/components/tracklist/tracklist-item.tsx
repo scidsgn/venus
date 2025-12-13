@@ -122,9 +122,16 @@ export const TracklistItem = ({
         ),
     }
 
+    const trackNumber = track.disc_track?.track_number?.trim()
+
     const firstColumnItem = showTrackNumber ? (
-        <span className="w-9 text-center font-mono text-gray-300/80 group-hover:opacity-0">
-            {track.disc_track?.track_number}
+        <span
+            className={cx(
+                "w-9 text-center font-mono text-gray-300/80 group-hover:opacity-0",
+                (trackNumber?.length ?? 0) > 2 && "text-xs font-medium",
+            )}
+        >
+            {trackNumber}
         </span>
     ) : (
         <TrackCoverArtwork size={36} track={track} />

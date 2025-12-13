@@ -367,7 +367,7 @@ class DiscTrack(Base):
     disc: Mapped["Disc"] = relationship(back_populates="tracks")
     track: Mapped["Track"] = relationship(back_populates="disc_track")
 
-    order: Mapped[int]
+    order: Mapped[str]
 
 
 class TrackArtist(Base):

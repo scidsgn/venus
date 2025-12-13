@@ -44,4 +44,4 @@ class DiscsResponse(BaseModel):
 
 class DiscTrackDto(BaseModel):
     disc: DiscDto
-    track_number: int
+    track_number: str

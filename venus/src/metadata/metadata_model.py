@@ -76,7 +76,7 @@ class MetadataTrack:
     remixers: list[MetadataArtist]
 
     disc: MetadataDisc | None
-    track_number: int | None
+    track_number: str | None
 
     artwork: music_tag.Artwork | None
 
