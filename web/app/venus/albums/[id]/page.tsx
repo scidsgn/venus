@@ -30,6 +30,7 @@ import { CoverArtwork } from "@/app/venus/components/cover-artwork/cover-artwork
 import { TracklistHeader } from "@/app/venus/components/tracklist/tracklist-header"
 import { TracklistItem } from "@/app/venus/components/tracklist/tracklist-item"
 import { venusErrorMapper } from "@/app/venus/venus-error-mapper"
+import { Fragment } from "react"
 
 const AlbumPage = async ({ params }: { params: Promise<{ id: string }> }) => {
     const albumId = +(await params).id
@@ -86,40 +87,52 @@ const AlbumPage = async ({ params }: { params: Promise<{ id: string }> }) => {
                     <AlbumPlaybackButtons album={album} />
                 </PageSidebar>
                 <PageContent className="flex flex-col">
-                    <div className="sticky top-0 z-50 flex flex-col gap-2 bg-gray-950">
-                        <TracklistHeader
-                            columns={["artists", "tempo", "key"]}
-                            showTrackNumber
-                        />
-                    </div>
-
                     {album.discs.map((disc) => (
-                        <div key={disc.id} className="flex flex-col gap-0.5">
-                            {disc.tracks.map((track) => (
-                                <TracklistItem
-                                    key={track.id}
-                                    track={{
-                                        ...track,
-                                        disc_track: {
-                                            disc: { ...disc, album },
-                                            track_number: track.track_number,
-                                        },
-                                    }}
+                        <Fragment key={disc.id}>
+                            {album.discs.length > 1 && (
+                                <header className="px-3 pb-1 text-lg font-semibold not-first-of-type:pt-6">
+                                    Disc {disc.disc_number}
+                                </header>
+                            )}
+
+                            <div className="sticky top-0 z-50 flex flex-col gap-2 bg-gray-950">
+                                <TracklistHeader
                                     columns={["artists", "tempo", "key"]}
                                     showTrackNumber
-                                    surroundingTracks={disc.tracks.map(
-                                        (discTrack) => ({
-                                            ...discTrack,
+                                />
+                            </div>
+
+                            <div
+                                key={disc.id}
+                                className="flex flex-col gap-0.5"
+                            >
+                                {disc.tracks.map((track) => (
+                                    <TracklistItem
+                                        key={track.id}
+                                        track={{
+                                            ...track,
                                             disc_track: {
                                                 disc: { ...disc, album },
                                                 track_number:
                                                     track.track_number,
                                             },
-                                        }),
-                                    )}
-                                />
-                            ))}
-                        </div>
+                                        }}
+                                        columns={["artists", "tempo", "key"]}
+                                        showTrackNumber
+                                        surroundingTracks={disc.tracks.map(
+                                            (discTrack) => ({
+                                                ...discTrack,
+                                                disc_track: {
+                                                    disc: { ...disc, album },
+                                                    track_number:
+                                                        track.track_number,
+                                                },
+                                            }),
+                                        )}
+                                    />
+                                ))}
+                            </div>
+                        </Fragment>
                     ))}
                 </PageContent>
             </PageLayout>
