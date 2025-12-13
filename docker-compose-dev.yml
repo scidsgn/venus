@@ -1,0 +1,13 @@
+services:
+  redis:
+    ports:
+      - 6379:6379
+  postgres:
+    ports:
+      - 5432:5432
+  venus:
+    ports:
+      - 8081:8080
+  web:
+    deploy:
+      replicas: 0

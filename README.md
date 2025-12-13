@@ -31,3 +31,13 @@ Copy over the provided `.env.template` file to a new `.env` file and fill in the
 > Make sure your music is in a subdirectory of your media folder, e.g. `./music` inside of `/data/media`.
 
 Finally, run `docker compose up` and pray it works!
+
+## Running in development mode
+
+CUBE can be launched with all services having their ports exposed by using the additional `docker-compose-dev.yml` file to override the base one:
+
+```sh
+docker compose -f docker-compose.yml -f docker-compose-dev.yml up
+```
+
+This will not run the `web` container by default.

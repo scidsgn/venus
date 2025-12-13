@@ -53,7 +53,7 @@ services:
         JWT_PUBLIC_KEY_PATH: /run/secrets/auth-public-key
         JWT_PRIVATE_KEY_PATH: /run/secrets/auth-private-key
     ports:
-      - "3000:3000"
+      - 3000:3000
     environment:
       VENUS_URL: http://venus:8080
       MEDIA_DRIVE: /etc/venus/media
