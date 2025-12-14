@@ -18,11 +18,14 @@
 import { useAccentStyle } from "@/app/components/accent/accent-provider"
 import { Button, ButtonProps } from "@/app/components/button/button"
 import { Content, Portal, Root, Trigger } from "@radix-ui/react-popover"
-import { ReactNode } from "react"
+import { ComponentProps, ReactNode } from "react"
 
-type PopoverProps = Omit<ButtonProps, "content"> & { content: ReactNode }
+type PopoverProps = Omit<ButtonProps, "content"> & {
+    content: ReactNode
+    contentProps?: ComponentProps<typeof Content>
+}
 
-export const Popover = ({ content, ...props }: PopoverProps) => {
+export const Popover = ({ content, contentProps, ...props }: PopoverProps) => {
     const accentStyle = useAccentStyle()
 
     return (
@@ -32,8 +35,9 @@ export const Popover = ({ content, ...props }: PopoverProps) => {
             </Trigger>
             <Portal>
                 <Content
-                    className="z-60 border-2 border-gray-950 bg-gray-900 shadow-lg shadow-gray-950"
+                    className="z-60 -mx-[2px] border-2 border-gray-950 bg-gray-900 shadow-lg shadow-gray-950"
                     style={accentStyle}
+                    {...contentProps}
                 >
                     {content}
                 </Content>

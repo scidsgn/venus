@@ -13,21 +13,33 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-import { Dropdown } from "@/app/components/menu/dropdown"
+import { Popover } from "@/app/components/popover/popover"
+import { LinkButton } from "@/app/components/button/button"
 
 export const AppPicker = () => {
+    const popoverContent = (
+        <div className="w-[calc(100vw-12*var(--spacing))] max-w-64">
+            <div className="p-2">
+                <LinkButton href="/venus/artists" icon="music_note">
+                    Music
+                </LinkButton>
+            </div>
+            <div className="border-t-2 border-gray-700 p-2">
+                <LinkButton href="/settings/general" icon="settings">
+                    Settings
+                </LinkButton>
+            </div>
+        </div>
+    )
+
     return (
-        <Dropdown
+        <Popover
             className="group grid size-9 place-items-center"
             icon="apps"
-            menu={[
-                {
-                    type: "item",
-                    name: "Music",
-                    icon: "music_note",
-                    href: "/venus/artists",
-                },
-            ]}
+            content={popoverContent}
+            contentProps={{
+                align: "end",
+            }}
         />
     )
 }
