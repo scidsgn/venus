@@ -113,7 +113,7 @@ export const TracklistItem = ({
         ),
     }
 
-    const trackNumber = track.disc_track?.track_number?.trim()
+    const trackNumber = `${track.disc_track?.track_number}${track.disc_track?.track_number_suffix || ""}`
 
     const firstColumnItem = showTrackNumber ? (
         <span

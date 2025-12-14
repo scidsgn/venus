@@ -97,10 +97,16 @@ def update(
 
         if track.disc_track:
             track.disc_track.disc = disc
-            track.disc_track.order = metadata_track.track_number
+            track.disc_track.order = metadata_track.track_number.order
+            track.disc_track.order_suffix = metadata_track.track_number.suffix
         else:
             session.add(
-                DiscTrack(disc=disc, track=track, order=metadata_track.track_number)
+                DiscTrack(
+                    disc=disc,
+                    track=track,
+                    order=metadata_track.track_number.order,
+                    order_suffix=metadata_track.track_number.suffix,
+                )
             )
     else:
         if track.disc_track:
@@ -138,7 +144,12 @@ def create(
     if metadata_track.disc and metadata_track.track_number:
         disc = import_disc(metadata_track.disc, session)
         session.add(
-            DiscTrack(disc=disc, track=track, order=metadata_track.track_number)
+            DiscTrack(
+                disc=disc,
+                track=track,
+                order=metadata_track.track_number.order,
+                order_suffix=metadata_track.track_number.suffix,
+            )
         )
 
     if metadata_track.artwork is not None:

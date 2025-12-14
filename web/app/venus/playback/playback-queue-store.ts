@@ -29,7 +29,7 @@ export type PlaybackBaseTrack = Pick<
     | "musical_features"
 > & {
     disc_track?:
-        | (Pick<DiscTrackDto, "track_number"> & {
+        | (Pick<DiscTrackDto, "track_number" | "track_number_suffix"> & {
               disc: Pick<DiscDto, "disc_number" | "track_count"> & {
                   album: Pick<AlbumDto, "id" | "title">
               }

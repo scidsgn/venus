@@ -56,7 +56,8 @@ class AlbumTrackDto(BaseModel):
 
     artwork: CoverArtDto | None
 
-    track_number: str
+    track_number: int
+    track_number_suffix: str
 
     @staticmethod
     def from_entity(track: Track):
@@ -83,7 +84,8 @@ class AlbumTrackDto(BaseModel):
             if track.musical_features is not None
             else None,
             artwork=resolve_track_artwork(track),
-            track_number=track.disc_track.order
+            track_number=track.disc_track.order,
+            track_number_suffix=track.disc_track.order_suffix
         )
 
 
@@ -102,7 +104,7 @@ class AlbumDiscDto(BaseModel):
             track_count=len(disc.tracks),
             tracks=[
                 AlbumTrackDto.from_entity(track.track)
-                for track in sorted(disc.tracks, key=lambda t: t.order)
+                for track in sorted(disc.tracks, key=lambda t: (t.order, t.order_suffix))
             ],
         )
 

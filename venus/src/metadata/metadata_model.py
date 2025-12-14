@@ -61,6 +61,10 @@ class MetadataDisc:
 
         return hash(self) == hash(other)
 
+@dataclass
+class MetadataTrackNumber:
+    order: int
+    suffix: str
 
 @dataclass
 class MetadataTrack:
@@ -76,7 +80,7 @@ class MetadataTrack:
     remixers: list[MetadataArtist]
 
     disc: MetadataDisc | None
-    track_number: str | None
+    track_number: MetadataTrackNumber | None
 
     artwork: music_tag.Artwork | None
 

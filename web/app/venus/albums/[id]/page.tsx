@@ -60,6 +60,7 @@ const AlbumPage = async ({ params }: { params: Promise<{ id: string }> }) => {
             disc_track: {
                 disc: { ...disc, album },
                 track_number: discTrack.track_number,
+                track_number_suffix: discTrack.track_number_suffix,
             },
         })),
     )
@@ -125,6 +126,8 @@ const AlbumPage = async ({ params }: { params: Promise<{ id: string }> }) => {
                                                 disc: { ...disc, album },
                                                 track_number:
                                                     track.track_number,
+                                                track_number_suffix:
+                                                    track.track_number_suffix,
                                             },
                                         }}
                                         columns={["artists", "tempo", "key"]}

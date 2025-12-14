@@ -22,6 +22,7 @@ from src.metadata.metadata_model import (
     MetadataTrack,
     MetadataArtist,
 )
+from src.metadata.parse_track_number import parse_track_number
 from src.metadata.split_artists import split_artists
 
 
@@ -69,7 +70,7 @@ def extract_metadata_from_file(file_path: str, settings: ExtractMetadataSettings
                 title_features.remixers + artist_features.remixers
             ),
             disc=disc,
-            track_number=track_number if track_number else None,
+            track_number=track_number,
             artwork=music_file["artwork"].first if music_file["artwork"] else None,
         )
 
@@ -77,13 +78,14 @@ def extract_metadata_from_file(file_path: str, settings: ExtractMetadataSettings
         pass
 
 
-def get_track_number(music_file: AudioFile) -> str | None:
-    # TODO: this might need extra logic for handling funky tags
+def get_track_number(music_file: AudioFile):
     raw_track_number = music_file.get("tracknumber", typeless=True)
     if raw_track_number is None:
         return None
+    if raw_track_number.first is None:
+        return None
 
-    return raw_track_number.first
+    return parse_track_number(raw_track_number.first.strip())
 
 
 def artists_from_list(artists: list[str]):

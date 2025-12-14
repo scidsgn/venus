@@ -112,7 +112,11 @@ export type AlbumTrackDto = {
     /**
      * Track Number
      */
-    track_number: string;
+    track_number: number;
+    /**
+     * Track Number Suffix
+     */
+    track_number_suffix: string;
 };
 
 /**
@@ -290,7 +294,11 @@ export type DiscTrackDto = {
     /**
      * Track Number
      */
-    track_number: string;
+    track_number: number;
+    /**
+     * Track Number Suffix
+     */
+    track_number_suffix: string;
 };
 
 /**

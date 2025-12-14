@@ -122,6 +122,7 @@ class TrackDto(BaseModel):
             disc_track=DiscTrackDto(
                 disc=DiscDto.from_entity(track.disc_track.disc),
                 track_number=track.disc_track.order,
+                track_number_suffix=track.disc_track.order_suffix
             )
             if track.disc_track is not None
             else None,
