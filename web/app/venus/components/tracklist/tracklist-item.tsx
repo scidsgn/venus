@@ -15,7 +15,6 @@
 
 "use client"
 
-import { actionFailed } from "@/app/action/action"
 import { useAction } from "@/app/action/use-action"
 import { AccentProvider } from "@/app/components/accent/accent-provider"
 import { Button } from "@/app/components/button/button"
@@ -36,14 +35,11 @@ import {
     PlaybackBaseTrack,
     usePlaybackQueue,
 } from "@/app/venus/playback/playback-queue-store"
-import {
-    addTrackToPlaylistAction,
-    getPlaylistsAction,
-} from "@/app/venus/playlists/playlist-actions"
+import { addTrackToPlaylistAction } from "@/app/venus/playlists/playlist-actions"
 import { venusErrorMapper } from "@/app/venus/venus-error-mapper"
 import Link from "next/link"
 import { Fragment, ReactNode } from "react"
-import useSWR from "swr"
+import { usePlaylistContext } from "@/app/venus/playlists/context/playlist-context"
 
 type TracklistItemProps = {
     track: PlaybackBaseTrack
@@ -60,12 +56,7 @@ export const TracklistItem = ({
     surroundingTracks,
     menu,
 }: TracklistItemProps) => {
-    const playlistsData = useSWR("venus-playlists", () => getPlaylistsAction())
-    const playlists =
-        (playlistsData.data &&
-            !actionFailed(playlistsData.data) &&
-            playlistsData.data.data.playlists) ||
-        []
+    const { playlists } = usePlaylistContext()
 
     const addTrackToPlaylist = useAction(
         addTrackToPlaylistAction,

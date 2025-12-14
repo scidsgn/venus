@@ -19,9 +19,13 @@ import { useAction } from "@/app/action/use-action"
 import { Button } from "@/app/components/button/button"
 import { createPlaylistAction } from "@/app/venus/playlists/playlist-actions"
 import { venusErrorMapper } from "@/app/venus/venus-error-mapper"
+import { usePlaylistContext } from "@/app/venus/playlists/context/playlist-context"
 
 export const PlaylistCreateButton = () => {
-    const createPlaylist = useAction(createPlaylistAction, venusErrorMapper)
+    const { refreshPlaylists } = usePlaylistContext()
+    const createPlaylist = useAction(createPlaylistAction, venusErrorMapper, {
+        onSuccess: () => refreshPlaylists(),
+    })
 
     return (
         <Button

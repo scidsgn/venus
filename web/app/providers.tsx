@@ -18,14 +18,17 @@ import { AudioContextProvider } from "@/app/venus/playback/audio-context"
 import { PlayerProvider } from "@/app/venus/playback/player-context"
 import { NuqsAdapter } from "nuqs/adapters/next/app"
 import { ReactNode } from "react"
+import { PlaylistContextProvider } from "./venus/playlists/context/playlist-context"
 
 export const Providers = ({ children }: { children?: ReactNode }) => (
     <NuqsAdapter>
         <AudioContextProvider>
-            <PlayerProvider>
-                {children}
-                <Toasts />
-            </PlayerProvider>
+            <PlaylistContextProvider>
+                <PlayerProvider>
+                    {children}
+                    <Toasts />
+                </PlayerProvider>
+            </PlaylistContextProvider>
         </AudioContextProvider>
     </NuqsAdapter>
 )
