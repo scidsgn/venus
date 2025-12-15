@@ -47,6 +47,7 @@ export const buttonVariants = cva({
 export type ButtonProps = ButtonHTMLAttributes<HTMLButtonElement> &
     VariantProps<typeof buttonVariants> & {
         icon?: IconType
+        rightIcon?: IconType
         fill?: boolean
         ongoing?: boolean
     }
@@ -63,6 +64,7 @@ export const Button = ({
     variant,
     size,
     icon,
+    rightIcon,
     fill,
     ongoing,
     disabled,
@@ -91,6 +93,13 @@ export const Button = ({
                 <span className={size === "lg" ? "px-1" : "px-0.5"}>
                     {children}
                 </span>
+            )}
+            {rightIcon && (
+                <IconSymbol
+                    icon={rightIcon}
+                    size={size === "lg" ? 24 : 20}
+                    fill={fill ?? (variant === "accent" || variant === "red")}
+                />
             )}
         </button>
     )

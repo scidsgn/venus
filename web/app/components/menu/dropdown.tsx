@@ -25,6 +25,9 @@ import {
     Root,
     Separator,
     Trigger,
+    Sub,
+    SubContent,
+    SubTrigger,
 } from "@radix-ui/react-dropdown-menu"
 
 type DropdownProps = ButtonProps & { menu: Menu }
@@ -43,43 +46,70 @@ export const Dropdown = ({ menu, ...props }: DropdownProps) => {
                     collisionPadding={24}
                     style={accentStyle}
                 >
-                    {menu.map((item, i) => {
-                        switch (item.type) {
-                            case "item":
-                                return (
-                                    <Item key={item.name} asChild>
-                                        {"href" in item ? (
-                                            <LinkButton
-                                                className="hover:bg-accent-500/20 active:bg-accent-500/40 pr-4"
-                                                icon={item.icon}
-                                                variant="transparent"
-                                                href={item.href}
-                                            >
-                                                {item.name}
-                                            </LinkButton>
-                                        ) : (
-                                            <Button
-                                                className="hover:bg-accent-500/20 active:bg-accent-500/40 pr-4"
-                                                variant="transparent"
-                                                icon={item.icon}
-                                                onClick={item.onClick}
-                                            >
-                                                {item.name}
-                                            </Button>
-                                        )}
-                                    </Item>
-                                )
-                            case "separator":
-                                return (
-                                    <Separator
-                                        key={i}
-                                        className="-mx-1 my-1 h-[2px] bg-gray-700"
-                                    />
-                                )
-                        }
-                    })}
+                    <DropdownMenuItems menu={menu} />
                 </Content>
             </Portal>
         </Root>
     )
+}
+
+const DropdownMenuItems = ({ menu }: { menu: Menu }) => {
+    return menu.map((item, i) => {
+        switch (item.type) {
+            case "item":
+                return (
+                    <Item key={item.name} asChild>
+                        {"href" in item ? (
+                            <LinkButton
+                                className="hover:bg-accent-500/20 active:bg-accent-500/40 pr-4"
+                                icon={item.icon}
+                                variant="transparent"
+                                href={item.href}
+                            >
+                                {item.name}
+                            </LinkButton>
+                        ) : (
+                            <Button
+                                className="hover:bg-accent-500/20 active:bg-accent-500/40 pr-4"
+                                variant="transparent"
+                                icon={item.icon}
+                                onClick={item.onClick}
+                            >
+                                {item.name}
+                            </Button>
+                        )}
+                    </Item>
+                )
+            case "separator":
+                return (
+                    <Separator
+                        key={i}
+                        className="-mx-1 my-1 h-[2px] bg-gray-700"
+                    />
+                )
+            case "submenu":
+                return (
+                    <Sub key={i}>
+                        <SubTrigger asChild>
+                            <Button
+                                className="hover:bg-accent-500/20 active:bg-accent-500/40"
+                                variant="transparent"
+                                icon={item.icon}
+                                rightIcon="chevron_right"
+                            >
+                                {item.name}
+                            </Button>
+                        </SubTrigger>
+                        <Portal>
+                            <SubContent
+                                className="z-100 flex flex-col border-2 border-gray-950 bg-gray-900 p-1 shadow-lg shadow-gray-950"
+                                alignOffset={-4}
+                            >
+                                <DropdownMenuItems menu={item.menu} />
+                            </SubContent>
+                        </Portal>
+                    </Sub>
+                )
+        }
+    })
 }

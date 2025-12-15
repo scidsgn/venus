@@ -141,13 +141,18 @@ export const TracklistItem = ({
         ...(menu ? ([...menu, { type: "separator" }] as Menu) : []),
         ...(playlists.length
             ? ([
-                  ...playlists.map((playlist) => ({
-                      type: "item",
-                      name: `Add to ${playlist.name}`,
+                  {
+                      type: "submenu",
                       icon: "playlist_add",
-                      onClick: () =>
-                          addTrackToPlaylist.run(playlist.id, track.id),
-                  })),
+                      name: "Add to playlist",
+                      menu: playlists.map((playlist) => ({
+                          type: "item",
+                          name: playlist.name,
+                          icon: "playlist_add",
+                          onClick: () =>
+                              addTrackToPlaylist.run(playlist.id, track.id),
+                      })),
+                  },
                   { type: "separator" },
               ] as Menu)
             : []),

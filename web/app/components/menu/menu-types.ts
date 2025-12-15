@@ -21,6 +21,13 @@ export type MenuItem = {
     name: string
 } & ({ onClick: () => void } | { href: string })
 
+export type MenuSubmenu = {
+    type: "submenu"
+    icon?: IconType
+    name: string
+    menu: Menu
+}
+
 export type MenuSeparator = { type: "separator" }
 
-export type Menu = (MenuItem | MenuSeparator)[]
+export type Menu = (MenuItem | MenuSeparator | MenuSubmenu)[]
