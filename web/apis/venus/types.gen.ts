@@ -672,6 +672,20 @@ export type ScanSettingsUpdateRequest = {
 export type ScanStatus = 'started' | 'completed' | 'failed' | 'interrupted';
 
 /**
+ * ScanTrackImportFailureDto
+ */
+export type ScanTrackImportFailureDto = {
+    /**
+     * File Path
+     */
+    file_path: string;
+    /**
+     * Details
+     */
+    details: string;
+};
+
+/**
  * ScanTrackLyricsDto
  */
 export type ScanTrackLyricsDto = {
@@ -742,6 +756,10 @@ export type ScanTracksImportDto = {
      * Ended At
      */
     ended_at: string | null;
+    /**
+     * Failures
+     */
+    failures: Array<ScanTrackImportFailureDto>;
 };
 
 /**

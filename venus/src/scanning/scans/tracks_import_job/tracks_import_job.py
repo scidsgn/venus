@@ -20,7 +20,7 @@ from src.db.schema import (
     NoSplitEntry,
     LibraryScanSettings,
     Track,
-    Scan,
+    Scan, TrackImportFailure,
 )
 from src.metadata.extract_settings import ExtractMetadataSettings
 from src.scanning.scans.job_utils import perform_job
@@ -36,6 +36,7 @@ from src.scanning.scans.tracks_import_job.cleanup_stray_entities import (
 from src.scanning.scans.tracks_import_job.scan_library_folders import (
     scan_library_folders,
 )
+from src.scanning.scans.tracks_import_job.tracks_import_errors import TrackMetadataFailDetails
 from src.scanning.scans.try_finish_scan import try_finish_scan
 from src.metadata.extract_metadata import extract_metadata_from_file
 from src.scanning.track_import.import_track import import_track
@@ -85,11 +86,24 @@ def perform_tracks_import_job(job_id: int):
             upserted_track_entities: list[Track] = []
             for file_to_add in scan_files.files_to_upsert:
                 print(f"Inspecting file {file_to_add}")
+
                 metadata_track = extract_metadata_from_file(
                     file_to_add.file_path, extract_metadata_settings
                 )
+                if isinstance(metadata_track, TrackMetadataFailDetails):
+                    failure = TrackImportFailure(
+                        job=job,
+                        file_path = file_to_add.file_path,
+                        details=metadata_track.model_dump_json(indent=2)
+                    )
+                    print(f"Failed to import {file_to_add.file_path}: {failure.details}")
+
+                    session.add(failure)
+                    continue
+
                 if metadata_track is None:
                     continue
+
                 track = import_track(
                     metadata_track,
                     None,

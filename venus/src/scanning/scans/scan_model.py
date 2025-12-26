@@ -21,9 +21,16 @@ from src.db.schema import (
     TracksImportJob,
     TrackMusicalEstimationJob,
     ScanStatus,
-    TrackLyricsJob,
+    TrackLyricsJob, TrackImportFailure,
 )
 
+class ScanTrackImportFailureDto(BaseModel):
+    file_path: str
+    details: str
+
+    @staticmethod
+    def from_entity(failure: TrackImportFailure):
+        return ScanTrackImportFailureDto(file_path=failure.file_path, details=failure.details)
 
 class ScanTracksImportDto(BaseModel):
     status: OngoingOperationStatus
@@ -35,6 +42,8 @@ class ScanTracksImportDto(BaseModel):
     started_at: datetime | None
     ended_at: datetime | None
 
+    failures: list[ScanTrackImportFailureDto]
+
     @staticmethod
     def from_entity(job: TracksImportJob):
         return ScanTracksImportDto(
@@ -44,6 +53,7 @@ class ScanTracksImportDto(BaseModel):
             enqueued_at=job.enqueued_at,
             started_at=job.started_at,
             ended_at=job.ended_at,
+            failures=[ScanTrackImportFailureDto.from_entity(failure) for failure in job.failures]
         )
 
 

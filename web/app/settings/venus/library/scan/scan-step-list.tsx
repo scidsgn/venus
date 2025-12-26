@@ -25,19 +25,38 @@ export const ScanStepList = ({ scan }: ScanStepListProps) => {
     return (
         <div className="flex flex-col gap-0.5 pt-2">
             {scan.tracks_import && (
-                <div className="flex min-w-0 items-center gap-1.5 bg-gray-900 px-2.5 py-1.5 text-sm font-medium">
-                    <IconSymbol
-                        icon={ongoingOperationStatusIcon(
-                            scan.tracks_import.status,
-                        )}
-                        size={20}
-                    />
-                    <span className="truncate">
-                        Importing tracks: {scan.tracks_import.upserted_tracks}{" "}
-                        added/updated, {scan.tracks_import.deleted_tracks}{" "}
-                        removed
-                    </span>
-                </div>
+                <>
+                    <div className="flex min-w-0 items-center gap-1.5 bg-gray-900 px-2.5 py-1.5 text-sm font-medium">
+                        <IconSymbol
+                            icon={ongoingOperationStatusIcon(
+                                scan.tracks_import.status,
+                            )}
+                            size={20}
+                        />
+                        <span className="truncate">
+                            Importing tracks:{" "}
+                            {scan.tracks_import.upserted_tracks} added/updated,{" "}
+                            {scan.tracks_import.deleted_tracks} removed
+                        </span>
+                    </div>
+                    {/* TODO enough for now but new year needs to bring more proper logging, probably in some modal */}
+                    {scan.tracks_import.failures.map((failure, i) => (
+                        <div key={i} className="flex flex-col bg-red-900/30">
+                            <div className="flex min-w-0 items-center gap-1.5 px-2.5 py-1.5 text-sm font-medium">
+                                <IconSymbol icon="dangerous" size={20} />
+                                <span className="truncate">
+                                    Failed to import{" "}
+                                    <span className="font-mono">
+                                        {failure.file_path}
+                                    </span>
+                                </span>
+                            </div>
+                            <pre className="px-2.5 py-1.5 font-mono text-xs">
+                                {failure.details}
+                            </pre>
+                        </div>
+                    ))}
+                </>
             )}
             {scan.musical_estimations && (
                 <div className="flex min-w-0 items-center gap-1.5 bg-gray-900 px-2.5 py-1.5 text-sm font-medium">

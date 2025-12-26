@@ -473,6 +473,19 @@ class TracksImportJob(Base):
     started_at: Mapped[Optional[datetime]]
     ended_at: Mapped[Optional[datetime]]
 
+    failures: Mapped[List["TrackImportFailure"]] = relationship(back_populates="job", cascade="all, delete")
+
+class TrackImportFailure(Base):
+    __tablename__ = "track_import_failures"
+
+    id: Mapped[int] = mapped_column(primary_key=True)
+
+    job_id: Mapped[int] = mapped_column(ForeignKey("tracks_import_jobs.id"))
+    job: Mapped["TracksImportJob"] = relationship(back_populates="failures")
+
+    file_path: Mapped[str]
+    details: Mapped[str]
+
 
 class TrackMusicalEstimationJob(Base):
     __tablename__ = "track_musical_estimation_jobs"
