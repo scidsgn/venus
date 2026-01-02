@@ -1,6 +1,6 @@
 /*
  * CUBE
- * Copyright (C) 2025  scidsgn
+ * Copyright (C) 2025-2026  scidsgn
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU Affero General Public License as published
  * by the Free Software Foundation, either version 3 of the License, or
@@ -58,7 +58,7 @@ const PlaylistPage = async ({ params }: PageProps<"/venus/playlists/[id]">) => {
         <PageLayout>
             <PageSidebar className="flex flex-col gap-6">
                 <div className="flex min-w-0 grow flex-col gap-1">
-                    <h1 className="-my-1 w-full pb-2 text-3xl font-semibold wrap-break-word">
+                    <h1 className="-my-1 w-full pb-2 text-3xl font-bold wrap-break-word">
                         {playlist.name}
                     </h1>
 

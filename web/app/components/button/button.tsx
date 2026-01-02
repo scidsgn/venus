@@ -1,6 +1,6 @@
 /*
  * CUBE
- * Copyright (C) 2025  scidsgn
+ * Copyright (C) 2025-2026  scidsgn
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU Affero General Public License as published
  * by the Free Software Foundation, either version 3 of the License, or
@@ -28,10 +28,10 @@ export const buttonVariants = cva({
     variants: {
         variant: {
             dark: "bg-gray-900 text-gray-50 hover:bg-gray-800 active:bg-gray-700 disabled:inset-ring-2 disabled:inset-ring-gray-500/30",
-            red: "bg-[color-mix(in_oklab,var(--color-gray-900)_50%,var(--color-red-800)_50%)] font-semibold text-red-200 hover:bg-[color-mix(in_oklab,var(--color-gray-800)_50%,var(--color-red-700)_50%)] active:bg-[color-mix(in_oklab,var(--color-gray-700)_50%,var(--color-red-600)_50%)] disabled:inset-ring-2 disabled:inset-ring-gray-500/30",
+            red: "bg-[color-mix(in_oklab,var(--color-gray-900)_50%,var(--color-red-800)_50%)] font-bold text-red-200 hover:bg-[color-mix(in_oklab,var(--color-gray-800)_50%,var(--color-red-700)_50%)] active:bg-[color-mix(in_oklab,var(--color-gray-700)_50%,var(--color-red-600)_50%)] disabled:inset-ring-2 disabled:inset-ring-gray-500/30",
             transparent:
                 "bg-transparent text-gray-50 hover:bg-gray-50/8 active:bg-gray-50/15",
-            accent: "bg-accent-700 text-accent-50 hover:bg-accent-600 active:bg-accent-500 font-semibold disabled:inset-ring-2 disabled:inset-ring-gray-500/30",
+            accent: "bg-accent-700 text-accent-50 hover:bg-accent-600 active:bg-accent-500 font-bold disabled:inset-ring-2 disabled:inset-ring-gray-500/30",
         },
         size: {
             md: "h-9 gap-1 px-2 text-sm",

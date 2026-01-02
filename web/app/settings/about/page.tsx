@@ -1,6 +1,6 @@
 /*
  * CUBE
- * Copyright (C) 2025  scidsgn
+ * Copyright (C) 2025-2026  scidsgn
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU Affero General Public License as published
  * by the Free Software Foundation, either version 3 of the License, or
@@ -26,7 +26,7 @@ const AboutSettingsPage = () => {
                             <path d="M48,0L48,48L0,48L0,0L48,0ZM10.667,10.627L10.667,33.522L5.333,38.855L5.333,42.627L9.105,42.627L19.731,32L19.755,31.96L16,31.96L16,15.96L32,15.96L32,31.96L21.333,31.96L21.333,37.293L37.333,37.293L37.333,10.627L10.667,10.627ZM10.667,10.627L10.667,5.293L5.333,5.293L5.333,10.627L10.667,10.627ZM37.333,10.627L42.667,10.627L42.667,5.293L37.333,5.293L37.333,10.627ZM37.333,37.293L37.333,42.627L42.667,42.627L42.667,37.293L37.333,37.293ZM26.667,21.293L21.333,21.293L21.333,26.627L26.667,26.627L26.667,21.293Z" />
                         </g>
                     </svg>
-                    <span className="text-accent-600 text-2xl font-semibold">
+                    <span className="text-accent-600 text-2xl font-bold">
                         CUBE
                     </span>
                     <span className="text-accent-600 -ml-2 text-2xl font-medium">

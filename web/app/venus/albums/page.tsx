@@ -1,6 +1,6 @@
 /*
  * CUBE
- * Copyright (C) 2025  scidsgn
+ * Copyright (C) 2025-2026  scidsgn
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU Affero General Public License as published
  * by the Free Software Foundation, either version 3 of the License, or
@@ -56,7 +56,7 @@ const AlbumsPage = async () => {
     return (
         <PageLayout>
             <PageSidebar className="flex flex-col gap-6">
-                <h1 className="text-4xl font-semibold">Albums</h1>
+                <h1 className="text-4xl font-bold">Albums</h1>
             </PageSidebar>
             <PageContent className="flex flex-col gap-1">
                 {letters.map((letter) => (

@@ -1,6 +1,6 @@
 /*
  * CUBE
- * Copyright (C) 2025  scidsgn
+ * Copyright (C) 2025-2026  scidsgn
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU Affero General Public License as published
  * by the Free Software Foundation, either version 3 of the License, or
@@ -32,7 +32,7 @@ const HomePage = async () => {
                         <p className="text-3xl font-medium">
                             Hello, @{user.userName}
                         </p>
-                        <p className="text-accent-500 text-3xl font-semibold">
+                        <p className="text-accent-500 text-3xl font-bold">
                             Welcome to CUBE
                         </p>
 

@@ -73,7 +73,7 @@ const AlbumPage = async ({ params }: { params: Promise<{ id: string }> }) => {
                     />
 
                     <div className="flex min-w-0 grow flex-col gap-1">
-                        <h1 className="-my-1 w-full pb-2 text-3xl font-semibold wrap-break-word">
+                        <h1 className="-my-1 w-full pb-2 text-3xl font-bold wrap-break-word">
                             {album.title}
                         </h1>
 

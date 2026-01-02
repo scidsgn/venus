@@ -1,6 +1,6 @@
 /*
  * CUBE
- * Copyright (C) 2025  scidsgn
+ * Copyright (C) 2025-2026  scidsgn
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU Affero General Public License as published
  * by the Free Software Foundation, either version 3 of the License, or
@@ -65,9 +65,7 @@ const TrackPage = async ({ params }: { params: Promise<{ id: string }> }) => {
                     {artwork && <TrackCoverArtwork size={256} track={track} />}
 
                     <div className="flex flex-col gap-1">
-                        <h1 className="text-3xl font-semibold">
-                            {track.title}
-                        </h1>
+                        <h1 className="text-3xl font-bold">{track.title}</h1>
 
                         <p className="text-sm font-medium">
                             <Duration>{track.duration}</Duration>

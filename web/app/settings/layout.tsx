@@ -1,6 +1,6 @@
 /*
  * CUBE
- * Copyright (C) 2025  scidsgn
+ * Copyright (C) 2025-2026  scidsgn
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU Affero General Public License as published
  * by the Free Software Foundation, either version 3 of the License, or
@@ -27,7 +27,7 @@ const SettingsLayout = ({ children }: { children?: ReactNode }) => {
     return (
         <PageLayout>
             <PageSidebar className="flex flex-col gap-3">
-                <h1 className="text-2xl font-semibold">Settings</h1>
+                <h1 className="text-2xl font-bold">Settings</h1>
 
                 <div className="flex flex-col gap-0.5">
                     <SettingsSideLink href="/settings/general" icon="interests">
