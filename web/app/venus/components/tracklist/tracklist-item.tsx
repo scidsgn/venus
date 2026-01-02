@@ -192,7 +192,7 @@ export const TracklistItem = ({
                             fill
                             className="absolute inset-0 opacity-0 group-hover:opacity-100 hover:opacity-100 active:opacity-100"
                             onClick={() => {
-                                if (surroundingTracks) {
+                                if (surroundingTracks.length > 0) {
                                     playTracks(surroundingTracks, track)
                                 } else {
                                     playTrack(track)
