@@ -13,12 +13,7 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-import {
-    AlbumDiscDto,
-    AlbumDto,
-    AlbumTrackDto,
-    venusGetAlbum,
-} from "@/apis/venus"
+import { venusGetAlbum } from "@/apis/venus"
 import { actionFailed } from "@/app/action/action"
 import { ActionErrorMessage } from "@/app/action/action-error-message"
 import { actionFromFetch } from "@/app/action/fetch-action"
@@ -36,10 +31,7 @@ import { TracklistHeader } from "@/app/venus/components/tracklist/tracklist-head
 import { TracklistItem } from "@/app/venus/components/tracklist/tracklist-item"
 import { venusErrorMapper } from "@/app/venus/venus-error-mapper"
 import { Fragment } from "react"
-import {
-    PlayerTrack,
-    trackMusicalFeaturesDtoToPlayerModel,
-} from "@/app/venus/playback/player-track-types"
+import { albumTrackDtoToPlayerTrack } from "@/app/venus/playback/player-track-types"
 import { TracklistProvider } from "@/app/venus/components/tracklist/tracklist-context"
 
 const AlbumPage = async ({ params }: { params: Promise<{ id: string }> }) => {
@@ -66,7 +58,7 @@ const AlbumPage = async ({ params }: { params: Promise<{ id: string }> }) => {
 
     const albumTracks = album.discs.flatMap((disc) =>
         disc.tracks.map((discTrack) =>
-            albumTrackToPlayerTrack(discTrack, disc, album),
+            albumTrackDtoToPlayerTrack(discTrack, disc, album),
         ),
     )
 
@@ -126,7 +118,7 @@ const AlbumPage = async ({ params }: { params: Promise<{ id: string }> }) => {
                                     {disc.tracks.map((track) => (
                                         <TracklistItem
                                             key={track.id}
-                                            track={albumTrackToPlayerTrack(
+                                            track={albumTrackDtoToPlayerTrack(
                                                 track,
                                                 disc,
                                                 album,
@@ -150,25 +142,3 @@ const AlbumPage = async ({ params }: { params: Promise<{ id: string }> }) => {
 }
 
 export default AlbumPage
-
-function albumTrackToPlayerTrack(
-    track: AlbumTrackDto,
-    disc: AlbumDiscDto,
-    album: AlbumDto,
-): PlayerTrack {
-    return {
-        ...track,
-        artwork: track.artwork || undefined,
-        album: {
-            id: album.id,
-            title: album.title,
-            discNumber: disc.disc_number,
-            trackCount: disc.track_count,
-            trackNumber: track.track_number,
-            trackNumberSuffix: track.track_number_suffix,
-        },
-        musicalFeatures: trackMusicalFeaturesDtoToPlayerModel(
-            track.musical_features,
-        ),
-    }
-}

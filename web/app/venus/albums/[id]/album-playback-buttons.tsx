@@ -1,6 +1,6 @@
 /*
  * CUBE
- * Copyright (C) 2025  scidsgn
+ * Copyright (C) 2025-2026  scidsgn
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU Affero General Public License as published
  * by the Free Software Foundation, either version 3 of the License, or
@@ -20,6 +20,7 @@ import { Button } from "@/app/components/button/button"
 import { Dropdown } from "@/app/components/menu/dropdown"
 import { usePlaybackQueue } from "@/app/venus/playback/playback-queue-store"
 import { useMemo } from "react"
+import { albumTrackDtoToPlayerTrack } from "@/app/venus/playback/player-track-types"
 
 type AlbumPlaybackButtonsProps = {
     album: AlbumWithDetailsDto
@@ -30,7 +31,12 @@ export const AlbumPlaybackButtons = ({ album }: AlbumPlaybackButtonsProps) => {
     const enqueue = usePlaybackQueue((state) => state.enqueue)
 
     const albumTracks = useMemo(
-        () => album.discs.flatMap((disc) => disc.tracks),
+        () =>
+            album.discs.flatMap((disc) =>
+                disc.tracks.map((track) =>
+                    albumTrackDtoToPlayerTrack(track, disc, album),
+                ),
+            ),
         [album],
     )
 

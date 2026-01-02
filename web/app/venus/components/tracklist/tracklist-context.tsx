@@ -13,6 +13,8 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
+"use client"
+
 import { PlayerTrack } from "@/app/venus/playback/player-track-types"
 import { createContext, ReactNode, useContext } from "react"
 

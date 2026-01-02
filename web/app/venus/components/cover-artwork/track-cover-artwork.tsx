@@ -16,11 +16,14 @@
 "use client"
 
 import { CoverArtwork } from "@/app/venus/components/cover-artwork/cover-artwork"
-import { PlayerTrack } from "@/app/venus/playback/player-track-types"
+import { CoverArtDto } from "@/apis/venus"
 
 type TrackCoverArtworkProps = {
     size: number
-    track: Pick<PlayerTrack, "artwork" | "title">
+    track: {
+        title: string
+        artwork?: CoverArtDto | null
+    }
 }
 
 export const TrackCoverArtwork = ({ size, track }: TrackCoverArtworkProps) => {

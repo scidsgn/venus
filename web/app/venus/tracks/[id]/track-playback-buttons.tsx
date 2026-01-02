@@ -1,6 +1,6 @@
 /*
  * CUBE
- * Copyright (C) 2025  scidsgn
+ * Copyright (C) 2025-2026  scidsgn
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU Affero General Public License as published
  * by the Free Software Foundation, either version 3 of the License, or
@@ -18,6 +18,7 @@
 import { TrackDto } from "@/apis/venus"
 import { Button } from "@/app/components/button/button"
 import { usePlaybackQueue } from "@/app/venus/playback/playback-queue-store"
+import { trackDtoToPlayerTrack } from "@/app/venus/playback/player-track-types"
 
 type TrackPlaybackButtonsProps = {
     track: TrackDto
@@ -34,7 +35,7 @@ export const TrackPlaybackButtons = ({ track }: TrackPlaybackButtonsProps) => {
                 variant="accent"
                 size="lg"
                 icon="play_arrow"
-                onClick={() => playTrack(track)}
+                onClick={() => playTrack(trackDtoToPlayerTrack(track))}
                 disabled={currentTrack?.id === track.id}
             >
                 {currentTrack?.id === track.id ? "Playing" : "Play"}
@@ -42,7 +43,7 @@ export const TrackPlaybackButtons = ({ track }: TrackPlaybackButtonsProps) => {
             <Button
                 size="lg"
                 icon="playlist_add"
-                onClick={() => enqueue([track])}
+                onClick={() => enqueue([trackDtoToPlayerTrack(track)])}
             />
         </>
     )

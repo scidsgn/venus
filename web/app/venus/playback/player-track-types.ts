@@ -14,6 +14,9 @@
  */
 
 import {
+    AlbumDiscDto,
+    AlbumDto,
+    AlbumTrackDto,
     ArtistWithNameDto,
     CoverArtDto,
     TrackDto,
@@ -68,13 +71,35 @@ export function trackDtoToPlayerTrack(track: TrackDto): PlayerTrack {
         ...track,
         artwork: track.artwork || undefined,
         album: album(),
-        musicalFeatures: trackMusicalFeaturesDtoToPlayerModel(
+        musicalFeatures: trackMusicalFeaturesDtoToPlayerTrack(
             track.musical_features,
         ),
     }
 }
 
-export function trackMusicalFeaturesDtoToPlayerModel(
+export function albumTrackDtoToPlayerTrack(
+    track: AlbumTrackDto,
+    disc: AlbumDiscDto,
+    album: AlbumDto,
+): PlayerTrack {
+    return {
+        ...track,
+        artwork: track.artwork || undefined,
+        album: {
+            id: album.id,
+            title: album.title,
+            discNumber: disc.disc_number,
+            trackCount: disc.track_count,
+            trackNumber: track.track_number,
+            trackNumberSuffix: track.track_number_suffix,
+        },
+        musicalFeatures: trackMusicalFeaturesDtoToPlayerTrack(
+            track.musical_features,
+        ),
+    }
+}
+
+function trackMusicalFeaturesDtoToPlayerTrack(
     musicalFeatures: TrackMusicalFeaturesDto | null | undefined,
 ): PlayerTrackMusicalFeatures | undefined {
     if (!musicalFeatures) {
