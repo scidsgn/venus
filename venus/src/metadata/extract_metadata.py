@@ -1,5 +1,5 @@
 #  CUBE
-#  Copyright (C) 2025  scidsgn
+#  Copyright (C) 2025-2026  scidsgn
 #  This program is free software: you can redistribute it and/or modify
 #  it under the terms of the GNU Affero General Public License as published
 #  by the Free Software Foundation, either version 3 of the License, or
@@ -26,6 +26,7 @@ from src.metadata.metadata_model import (
     MetadataArtist,
 )
 from src.metadata.parse_track_number import parse_track_number
+from src.metadata.parse_track_year import parse_track_year
 from src.metadata.split_artists import split_artists
 from src.scanning.scans.tracks_import_job.tracks_import_errors import TrackMetadataFailDetails
 
@@ -43,6 +44,7 @@ def extract_metadata_from_file(file_path: str, settings: ExtractMetadataSettings
             album_artists = music_file["albumartist"].first
             disc_number = music_file["discnumber"].first
             track_number = get_track_number(music_file)
+            release_year = get_track_year(music_file)
 
             album = (
                 MetadataAlbum(
@@ -51,9 +53,7 @@ def extract_metadata_from_file(file_path: str, settings: ExtractMetadataSettings
                     artwork=music_file["artwork"].first
                     if music_file["artwork"]
                     else None,
-                    release_year=music_file["year"].first
-                    if music_file["year"]
-                    else None,
+                    release_year=release_year
                 )
                 if album_title and album_artists
                 else None
@@ -69,7 +69,7 @@ def extract_metadata_from_file(file_path: str, settings: ExtractMetadataSettings
                 file_path=file_path,
                 duration=music_file["#length"].first,
                 title=title_features.actual_value,
-                release_year=music_file["year"].first,
+                release_year=release_year,
                 artists=artists_from_list(
                     split_artists(artist_features.actual_value, settings)
                 ),
@@ -110,6 +110,15 @@ def get_track_number(music_file: AudioFile):
         return None
 
     return parse_track_number(raw_track_number.first.strip())
+
+def get_track_year(music_file: AudioFile):
+    raw_year = music_file.get("year", typeless=True)
+    if raw_year is None:
+        return None
+    if raw_year.first is None:
+        return None
+
+    return parse_track_year(raw_year.first.strip())
 
 
 def artists_from_list(artists: list[str]):
