@@ -1,6 +1,6 @@
 /*
  * CUBE
- * Copyright (C) 2025  scidsgn
+ * Copyright (C) 2025-2026  scidsgn
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU Affero General Public License as published
  * by the Free Software Foundation, either version 3 of the License, or
@@ -37,12 +37,15 @@ import {
 } from "@dnd-kit/sortable"
 import { IconSymbol } from "@/app/components/icon/icon-symbol"
 import { TracklistHeader } from "@/app/venus/components/tracklist/tracklist-header"
-import { PlaybackBaseTrack } from "@/app/venus/playback/playback-queue-store"
 import { reorderPlaylistTracksAction } from "@/app/venus/playlists/playlist-actions"
 import { useAction } from "@/app/action/use-action"
 import { venusErrorMapper } from "@/app/venus/venus-error-mapper"
 
 import { debounce } from "lodash"
+import {
+    PlayerTrack,
+    trackDtoToPlayerTrack,
+} from "@/app/venus/playback/player-track-types"
 
 type PlaylistTracksProps = {
     playlist: PlaylistWithTracksDto
@@ -75,7 +78,7 @@ export const PlaylistTracks = ({ playlist }: PlaylistTracksProps) => {
     )
 
     const surroundingTracks = useMemo(
-        () => tracks.map((track) => track.track),
+        () => tracks.map((track) => trackDtoToPlayerTrack(track.track)),
         [tracks],
     )
 
@@ -155,7 +158,7 @@ export const PlaylistTracks = ({ playlist }: PlaylistTracksProps) => {
 type PlaylistTracksDraggableItemProps = {
     playlist: PlaylistWithTracksDto
     track: PlaylistTrackDto
-    surroundingTracks?: PlaybackBaseTrack[]
+    surroundingTracks?: PlayerTrack[]
     active: boolean
 }
 
@@ -201,7 +204,7 @@ const PlaylistTracksDraggableItem = ({
 type PlaylistTracksItemProps = {
     playlist: PlaylistWithTracksDto
     track: PlaylistTrackDto
-    surroundingTracks?: PlaybackBaseTrack[]
+    surroundingTracks?: PlayerTrack[]
     itemProps?: DetailedHTMLProps<
         HTMLAttributes<HTMLDivElement>,
         HTMLDivElement

@@ -1,6 +1,6 @@
 /*
  * CUBE
- * Copyright (C) 2025  scidsgn
+ * Copyright (C) 2025-2026  scidsgn
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU Affero General Public License as published
  * by the Free Software Foundation, either version 3 of the License, or
@@ -13,33 +13,12 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-import { AlbumDto, DiscDto, DiscTrackDto, TrackDto } from "@/apis/venus"
 import { create } from "zustand"
-
-// TODO this is a nasty workaround for the fact that the track model is scuffed a bit - this needs its own track model
-export type PlaybackBaseTrack = Pick<
-    TrackDto,
-    | "id"
-    | "title"
-    | "duration"
-    | "artists"
-    | "features"
-    | "remixers"
-    | "artwork"
-    | "musical_features"
-> & {
-    disc_track?:
-        | (Pick<DiscTrackDto, "track_number" | "track_number_suffix"> & {
-              disc: Pick<DiscDto, "disc_number" | "track_count"> & {
-                  album: Pick<AlbumDto, "id" | "title">
-              }
-          })
-        | null
-}
+import { PlayerTrack } from "@/app/venus/playback/player-track-types"
 
 export type PlaybackQueueEntry = {
     id: string
-    track: PlaybackBaseTrack
+    track: PlayerTrack
     order: number
 }
 
@@ -58,13 +37,13 @@ type QueueState = QueueLists & {
     setRepeat: (repeat: boolean) => void
     setShuffle: (shuffle: boolean) => void
 
-    playTrack: (track: PlaybackBaseTrack) => void
+    playTrack: (track: PlayerTrack) => void
     playTracks: (
-        tracks: PlaybackBaseTrack[],
-        startWith?: PlaybackBaseTrack | null,
+        tracks: PlayerTrack[],
+        startWith?: PlayerTrack | null,
         shuffled?: boolean,
     ) => void
-    enqueue: (tracks: PlaybackBaseTrack[]) => void
+    enqueue: (tracks: PlayerTrack[]) => void
 
     goToEntry: (entry: PlaybackQueueEntry) => void
     removeEntry: (entry: PlaybackQueueEntry) => void

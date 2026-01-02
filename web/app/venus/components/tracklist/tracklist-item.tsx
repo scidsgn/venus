@@ -1,6 +1,6 @@
 /*
  * CUBE
- * Copyright (C) 2025  scidsgn
+ * Copyright (C) 2025-2026  scidsgn
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU Affero General Public License as published
  * by the Free Software Foundation, either version 3 of the License, or
@@ -31,21 +31,19 @@ import {
     TracklistColumn,
     tracklistColumnsToGridTemplate,
 } from "@/app/venus/components/tracklist/tracklist-column"
-import {
-    PlaybackBaseTrack,
-    usePlaybackQueue,
-} from "@/app/venus/playback/playback-queue-store"
+import { usePlaybackQueue } from "@/app/venus/playback/playback-queue-store"
 import { addTrackToPlaylistAction } from "@/app/venus/playlists/playlist-actions"
 import { venusErrorMapper } from "@/app/venus/venus-error-mapper"
 import Link from "next/link"
 import { Fragment, ReactNode } from "react"
 import { usePlaylistContext } from "@/app/venus/playlists/context/playlist-context"
+import { PlayerTrack } from "@/app/venus/playback/player-track-types"
 
 type TracklistItemProps = {
-    track: PlaybackBaseTrack
+    track: PlayerTrack
     columns: TracklistColumn[]
     showTrackNumber?: boolean
-    surroundingTracks?: PlaybackBaseTrack[]
+    surroundingTracks?: PlayerTrack[]
     menu?: Menu
 }
 
@@ -89,31 +87,31 @@ export const TracklistItem = ({
         ),
         album: (
             <span className="truncate">
-                {track.disc_track && (
+                {track.album && (
                     <Link
                         className="text-accent-500/80 font-medium"
-                        href={`/venus/albums/${track.disc_track.disc.album.id}`}
+                        href={`/venus/albums/${track.album.id}`}
                     >
-                        {track.disc_track.disc.album.title}
+                        {track.album.title}
                     </Link>
                 )}
             </span>
         ),
         tempo: (
             <span className="font-mono text-gray-300/80">
-                {track.musical_features &&
-                    `${Math.round(track.musical_features.bpm)} BPM`}
+                {track.musicalFeatures &&
+                    `${Math.round(track.musicalFeatures.bpm)} BPM`}
             </span>
         ),
         key: (
             <span className="font-mono text-gray-300/80">
-                {track.musical_features &&
-                    `${track.musical_features.key} ${track.musical_features.scale}`}
+                {track.musicalFeatures &&
+                    `${track.musicalFeatures.key} ${track.musicalFeatures.scale}`}
             </span>
         ),
     }
 
-    const trackNumber = `${track.disc_track?.track_number}${track.disc_track?.track_number_suffix || ""}`
+    const trackNumber = `${track.album?.trackNumber}${track.album?.trackNumberSuffix || ""}`
 
     const firstColumnItem = showTrackNumber ? (
         <span

@@ -1,6 +1,6 @@
 /*
  * CUBE
- * Copyright (C) 2025  scidsgn
+ * Copyright (C) 2025-2026  scidsgn
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU Affero General Public License as published
  * by the Free Software Foundation, either version 3 of the License, or
@@ -18,11 +18,11 @@
 import { actionFailed } from "@/app/action/action"
 import { Duration } from "@/app/components/text/duration"
 import { fetchLyricsAction } from "@/app/venus/now-playing/panel/fetch-lyrics-action"
-import { PlaybackBaseTrack } from "@/app/venus/playback/playback-queue-store"
 import useSWR from "swr"
+import { PlayerTrack } from "@/app/venus/playback/player-track-types"
 
 type NowPlayingPanelLyricsProps = {
-    track: PlaybackBaseTrack
+    track: PlayerTrack
 }
 
 export const NowPlayingPanelLyrics = ({

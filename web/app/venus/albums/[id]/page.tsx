@@ -1,6 +1,6 @@
 /*
  * CUBE
- * Copyright (C) 2025  scidsgn
+ * Copyright (C) 2025-2026  scidsgn
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU Affero General Public License as published
  * by the Free Software Foundation, either version 3 of the License, or
@@ -13,7 +13,12 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-import { venusGetAlbum } from "@/apis/venus"
+import {
+    AlbumDiscDto,
+    AlbumDto,
+    AlbumTrackDto,
+    venusGetAlbum,
+} from "@/apis/venus"
 import { actionFailed } from "@/app/action/action"
 import { ActionErrorMessage } from "@/app/action/action-error-message"
 import { actionFromFetch } from "@/app/action/fetch-action"
@@ -31,6 +36,10 @@ import { TracklistHeader } from "@/app/venus/components/tracklist/tracklist-head
 import { TracklistItem } from "@/app/venus/components/tracklist/tracklist-item"
 import { venusErrorMapper } from "@/app/venus/venus-error-mapper"
 import { Fragment } from "react"
+import {
+    PlayerTrack,
+    trackMusicalFeaturesDtoToPlayerModel,
+} from "@/app/venus/playback/player-track-types"
 
 const AlbumPage = async ({ params }: { params: Promise<{ id: string }> }) => {
     const albumId = +(await params).id
@@ -55,14 +64,9 @@ const AlbumPage = async ({ params }: { params: Promise<{ id: string }> }) => {
     const album = result.data
 
     const albumTracks = album.discs.flatMap((disc) =>
-        disc.tracks.map((discTrack) => ({
-            ...discTrack,
-            disc_track: {
-                disc: { ...disc, album },
-                track_number: discTrack.track_number,
-                track_number_suffix: discTrack.track_number_suffix,
-            },
-        })),
+        disc.tracks.map((discTrack) =>
+            albumTrackToPlayerTrack(discTrack, disc, album),
+        ),
     )
 
     return (
@@ -120,16 +124,11 @@ const AlbumPage = async ({ params }: { params: Promise<{ id: string }> }) => {
                                 {disc.tracks.map((track) => (
                                     <TracklistItem
                                         key={track.id}
-                                        track={{
-                                            ...track,
-                                            disc_track: {
-                                                disc: { ...disc, album },
-                                                track_number:
-                                                    track.track_number,
-                                                track_number_suffix:
-                                                    track.track_number_suffix,
-                                            },
-                                        }}
+                                        track={albumTrackToPlayerTrack(
+                                            track,
+                                            disc,
+                                            album,
+                                        )}
                                         columns={["artists", "tempo", "key"]}
                                         showTrackNumber
                                         surroundingTracks={albumTracks}
@@ -145,3 +144,25 @@ const AlbumPage = async ({ params }: { params: Promise<{ id: string }> }) => {
 }
 
 export default AlbumPage
+
+function albumTrackToPlayerTrack(
+    track: AlbumTrackDto,
+    disc: AlbumDiscDto,
+    album: AlbumDto,
+): PlayerTrack {
+    return {
+        ...track,
+        artwork: track.artwork || undefined,
+        album: {
+            id: album.id,
+            title: album.title,
+            discNumber: disc.disc_number,
+            trackCount: disc.track_count,
+            trackNumber: track.track_number,
+            trackNumberSuffix: track.track_number_suffix,
+        },
+        musicalFeatures: trackMusicalFeaturesDtoToPlayerModel(
+            track.musical_features,
+        ),
+    }
+}

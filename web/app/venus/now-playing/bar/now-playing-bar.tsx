@@ -1,6 +1,6 @@
 /*
  * CUBE
- * Copyright (C) 2025  scidsgn
+ * Copyright (C) 2025-2026  scidsgn
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU Affero General Public License as published
  * by the Free Software Foundation, either version 3 of the License, or
@@ -18,10 +18,10 @@
 import { AccentProvider } from "@/app/components/accent/accent-provider"
 import { NowPlayingMini } from "@/app/venus/now-playing/bar/now-playing-mini"
 import { useNowPlaying } from "@/app/venus/now-playing/now-playing-store"
-import { PlaybackBaseTrack } from "@/app/venus/playback/playback-queue-store"
+import { PlayerTrack } from "@/app/venus/playback/player-track-types"
 
 type NowPlayingBarProps = {
-    track: PlaybackBaseTrack
+    track: PlayerTrack
 }
 
 export const NowPlayingBar = ({ track }: NowPlayingBarProps) => {

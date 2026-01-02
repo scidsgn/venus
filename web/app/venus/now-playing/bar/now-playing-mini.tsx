@@ -1,6 +1,6 @@
 /*
  * CUBE
- * Copyright (C) 2025  scidsgn
+ * Copyright (C) 2025-2026  scidsgn
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU Affero General Public License as published
  * by the Free Software Foundation, either version 3 of the License, or
@@ -19,15 +19,13 @@ import { cx } from "@/app/cva.config"
 import { TrackCoverArtwork } from "@/app/venus/components/cover-artwork/track-cover-artwork"
 import { NowPlayingNextButton } from "@/app/venus/now-playing/transport/now-playing-next-button"
 import { NowPlayingPlayButton } from "@/app/venus/now-playing/transport/now-playing-play-button"
-import {
-    PlaybackBaseTrack,
-    usePlaybackQueue,
-} from "@/app/venus/playback/playback-queue-store"
+import { usePlaybackQueue } from "@/app/venus/playback/playback-queue-store"
 import { usePlayer } from "@/app/venus/playback/player-context"
 import { usePlaybackSettings } from "@/app/venus/playback/playback-settings-store"
+import { PlayerTrack } from "@/app/venus/playback/player-track-types"
 
 type NowPlayingMiniProps = {
-    track: PlaybackBaseTrack
+    track: PlayerTrack
     onExpand: () => void
 }
 

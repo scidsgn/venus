@@ -1,6 +1,6 @@
 /*
  * CUBE
- * Copyright (C) 2025  scidsgn
+ * Copyright (C) 2025-2026  scidsgn
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU Affero General Public License as published
  * by the Free Software Foundation, either version 3 of the License, or
@@ -19,6 +19,7 @@ import { ActionErrorMessage } from "@/app/action/action-error-message"
 import { actionFromFetch } from "@/app/action/fetch-action"
 import { TracklistItem } from "@/app/venus/components/tracklist/tracklist-item"
 import { venusErrorMapper } from "@/app/venus/venus-error-mapper"
+import { trackDtoToPlayerTrack } from "@/app/venus/playback/player-track-types"
 
 type ArtistTracksProps = {
     artist: ArtistWithDetailsDto
@@ -44,7 +45,7 @@ export const ArtistTracks = async ({ artist }: ArtistTracksProps) => {
             {tracks.tracks.map((track) => (
                 <TracklistItem
                     key={track.id}
-                    track={track}
+                    track={trackDtoToPlayerTrack(track)}
                     columns={["artists", "album", "tempo", "key"]}
                 />
             ))}
