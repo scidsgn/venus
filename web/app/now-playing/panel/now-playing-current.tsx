@@ -80,7 +80,7 @@ export const NowPlayingCurrent = ({ track }: NowPlayingCurrentProps) => {
                         className="absolute inset-0 grid size-12 place-items-center opacity-0 hover:opacity-100 active:opacity-100"
                         variant="accent"
                         icon="fullscreen"
-                        href="/venus/now-playing"
+                        href="/now-playing"
                         title="Open full screen mode"
                     />
                 </div>

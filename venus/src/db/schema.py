@@ -1,5 +1,5 @@
 #  CUBE
-#  Copyright (C) 2025  scidsgn
+#  Copyright (C) 2025-2026  scidsgn
 #  This program is free software: you can redistribute it and/or modify
 #  it under the terms of the GNU Affero General Public License as published
 #  by the Free Software Foundation, either version 3 of the License, or
@@ -210,7 +210,7 @@ class Track(Base):
     library_folder: Mapped["LibraryFolder"] = relationship(back_populates="tracks")
 
     title: Mapped[str]
-    release_year: Mapped[int]
+    release_year: Mapped[Optional[int]]
     duration: Mapped[float]
 
     artists: Mapped[List["TrackArtist"]] = relationship(
@@ -473,7 +473,10 @@ class TracksImportJob(Base):
     started_at: Mapped[Optional[datetime]]
     ended_at: Mapped[Optional[datetime]]
 
-    failures: Mapped[List["TrackImportFailure"]] = relationship(back_populates="job", cascade="all, delete")
+    failures: Mapped[List["TrackImportFailure"]] = relationship(
+        back_populates="job", cascade="all, delete"
+    )
+
 
 class TrackImportFailure(Base):
     __tablename__ = "track_import_failures"

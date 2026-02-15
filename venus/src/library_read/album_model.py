@@ -1,5 +1,5 @@
 #  CUBE
-#  Copyright (C) 2025  scidsgn
+#  Copyright (C) 2025-2026  scidsgn
 #  This program is free software: you can redistribute it and/or modify
 #  it under the terms of the GNU Affero General Public License as published
 #  by the Free Software Foundation, either version 3 of the License, or
@@ -46,7 +46,7 @@ class AlbumTrackMusicalFeaturesDto(BaseModel):
 class AlbumTrackDto(BaseModel):
     id: int
     title: str
-    release_year: int
+    release_year: int | None
     duration: float
     artists: list[ArtistWithNameDto]
     features: list[ArtistWithNameDto]
@@ -85,7 +85,7 @@ class AlbumTrackDto(BaseModel):
             else None,
             artwork=resolve_track_artwork(track),
             track_number=track.disc_track.order,
-            track_number_suffix=track.disc_track.order_suffix
+            track_number_suffix=track.disc_track.order_suffix,
         )
 
 
@@ -104,7 +104,9 @@ class AlbumDiscDto(BaseModel):
             track_count=len(disc.tracks),
             tracks=[
                 AlbumTrackDto.from_entity(track.track)
-                for track in sorted(disc.tracks, key=lambda t: (t.order, t.order_suffix))
+                for track in sorted(
+                    disc.tracks, key=lambda t: (t.order, t.order_suffix)
+                )
             ],
         )
 

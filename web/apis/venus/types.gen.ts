@@ -90,7 +90,7 @@ export type AlbumTrackDto = {
     /**
      * Release Year
      */
-    release_year: number;
+    release_year: number | null;
     /**
      * Duration
      */
@@ -815,7 +815,7 @@ export type TrackDto = {
     /**
      * Release Year
      */
-    release_year: number;
+    release_year: number | null;
     /**
      * Duration
      */

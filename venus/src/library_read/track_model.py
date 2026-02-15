@@ -1,5 +1,5 @@
 #  CUBE
-#  Copyright (C) 2025  scidsgn
+#  Copyright (C) 2025-2026  scidsgn
 #  This program is free software: you can redistribute it and/or modify
 #  it under the terms of the GNU Affero General Public License as published
 #  by the Free Software Foundation, either version 3 of the License, or
@@ -85,7 +85,7 @@ class TrackMusicbrainzDetailsDto(BaseModel):
 class TrackDto(BaseModel):
     id: int
     title: str
-    release_year: int
+    release_year: int | None
     duration: float
     artists: list[ArtistWithNameDto]
     features: list[ArtistWithNameDto]
@@ -122,7 +122,7 @@ class TrackDto(BaseModel):
             disc_track=DiscTrackDto(
                 disc=DiscDto.from_entity(track.disc_track.disc),
                 track_number=track.disc_track.order,
-                track_number_suffix=track.disc_track.order_suffix
+                track_number_suffix=track.disc_track.order_suffix,
             )
             if track.disc_track is not None
             else None,
