@@ -16,14 +16,36 @@
 "use client"
 
 import { PlayerTrack } from "@/app/venus/playback/player-track-types"
-import { createContext, ReactNode, useContext } from "react"
+import {
+    createContext,
+    ReactNode,
+    useCallback,
+    useContext,
+    useState,
+} from "react"
+import { TracklistSelectionBar } from "@/app/venus/components/tracklist/tracklist-selection-bar"
+
+type SelectTrackOptions = {
+    ctrlKey: boolean
+    shiftKey: boolean
+}
 
 type TracklistContextValue = {
     tracks: PlayerTrack[]
+    selectedTrackIds: number[]
+
+    selectTrack: (track: PlayerTrack, options: SelectTrackOptions) => void
+    clearTrackSelection: () => void
+    setTrackSelection: (track: PlayerTrack, selected: boolean) => void
 }
 
 const TracklistContext = createContext<TracklistContextValue>({
     tracks: [],
+    selectedTrackIds: [],
+
+    selectTrack: () => {},
+    clearTrackSelection: () => {},
+    setTrackSelection: () => {},
 })
 
 type TracklistProviderProps = {
@@ -35,7 +57,66 @@ export const TracklistProvider = ({
     children,
     tracks,
 }: TracklistProviderProps) => {
-    return <TracklistContext value={{ tracks }}>{children}</TracklistContext>
+    const [selectedTrackIds, setSelectedTrackIds] = useState<number[]>([])
+
+    const selectTrack = useCallback(
+        (track: PlayerTrack, options: SelectTrackOptions) => {
+            // TODO: support for shift-select
+            if (options.ctrlKey) {
+                setSelectedTrackIds((tracks) => {
+                    const alreadySelected = tracks.includes(track.id)
+
+                    if (alreadySelected) {
+                        return tracks.filter((id) => id !== track.id)
+                    } else {
+                        return [...tracks, track.id]
+                    }
+                })
+            } else {
+                setSelectedTrackIds([track.id])
+            }
+        },
+        [],
+    )
+
+    const clearTrackSelection = useCallback(() => {
+        setSelectedTrackIds([])
+    }, [])
+
+    const setTrackSelection = useCallback(
+        (track: PlayerTrack, selected: boolean) => {
+            if (selected) {
+                setSelectedTrackIds((tracks) => [...tracks, track.id])
+            } else {
+                setSelectedTrackIds((tracks) =>
+                    tracks.filter((id) => id !== track.id),
+                )
+            }
+        },
+        [],
+    )
+
+    return (
+        <TracklistContext
+            value={{
+                tracks,
+                selectedTrackIds,
+                selectTrack,
+                clearTrackSelection,
+                setTrackSelection,
+            }}
+        >
+            {children}
+
+            {selectedTrackIds.length > 0 && (
+                <TracklistSelectionBar
+                    tracks={tracks}
+                    selectedTrackIds={selectedTrackIds}
+                    setSelectedTrackIds={setSelectedTrackIds}
+                />
+            )}
+        </TracklistContext>
+    )
 }
 
 export function useTracklist() {

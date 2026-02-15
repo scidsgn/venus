@@ -39,6 +39,7 @@ import { Fragment, ReactNode } from "react"
 import { usePlaylistContext } from "@/app/venus/playlists/context/playlist-context"
 import { PlayerTrack } from "@/app/venus/playback/player-track-types"
 import { useTracklist } from "@/app/venus/components/tracklist/tracklist-context"
+import { Checkbox } from "@/app/components/checkbox"
 
 type TracklistItemProps = {
     track: PlayerTrack
@@ -54,7 +55,15 @@ export const TracklistItem = ({
     menu,
 }: TracklistItemProps) => {
     const { playlists } = usePlaylistContext()
-    const { tracks: surroundingTracks } = useTracklist()
+    const {
+        tracks: surroundingTracks,
+        selectedTrackIds,
+        selectTrack,
+        clearTrackSelection,
+        setTrackSelection,
+    } = useTracklist()
+
+    const isSelected = selectedTrackIds.includes(track.id)
 
     const addTrackToPlaylist = useAction(
         addTrackToPlaylistAction,
@@ -126,8 +135,6 @@ export const TracklistItem = ({
         <TrackCoverArtwork size={36} track={track} />
     )
 
-    const currentlyPlaying = currentTrackId === track.id
-
     const trackMenu: Menu = [
         {
             type: "item",
@@ -166,75 +173,108 @@ export const TracklistItem = ({
         <ContextMenu
             className={cx(
                 "odd:bg-gray-900/30 hover:bg-gray-900",
-                currentlyPlaying && "bg-accent-500/20 odd:bg-accent-500/25",
+                isSelected &&
+                    "bg-accent-500/20 odd:bg-accent-500/25 hover:bg-accent-500/40",
             )}
             menu={trackMenu}
         >
-            <div
-                className="group relative grid h-9 items-center gap-2 overflow-hidden text-sm"
-                style={{
-                    gridTemplateColumns: `36px 1.5fr ${tracklistColumnsToGridTemplate(columns)} 64px auto`,
-                }}
-            >
+            <div className="group relative grid h-9 grid-cols-[36px_1fr_auto] text-sm">
                 <div className="relative grid size-9 place-items-center">
-                    {currentTrackId === track.id ? (
-                        <div className="text-accent-500 grid size-9 place-items-center">
-                            <IconSymbol icon="graphic_eq" size={20} />
-                        </div>
-                    ) : (
-                        firstColumnItem
-                    )}
-
-                    <AccentProvider color={track?.artwork?.accent_color}>
-                        <Button
-                            variant="accent"
-                            icon="play_arrow"
-                            fill
-                            className="absolute inset-0 opacity-0 group-hover:opacity-100 hover:opacity-100 active:opacity-100"
-                            onClick={() => {
-                                if (surroundingTracks.length > 0) {
-                                    playTracks(surroundingTracks, track)
-                                } else {
-                                    playTrack(track)
+                    {selectedTrackIds.length > 0 ? (
+                        <>
+                            <Checkbox
+                                className="ml-1.5"
+                                checked={isSelected}
+                                onCheckedChange={(checked) =>
+                                    setTrackSelection(track, checked === true)
                                 }
-                            }}
-                        />
-                    </AccentProvider>
+                            />
+                        </>
+                    ) : (
+                        <>
+                            {currentTrackId === track.id ? (
+                                <div className="bg-accent-800/50 text-accent-300 grid size-9 place-items-center">
+                                    <IconSymbol icon="graphic_eq" size={20} />
+                                </div>
+                            ) : (
+                                firstColumnItem
+                            )}
+
+                            <AccentProvider
+                                color={track?.artwork?.accent_color}
+                            >
+                                <Button
+                                    variant="accent"
+                                    icon="play_arrow"
+                                    fill
+                                    className="absolute inset-0 opacity-0 group-hover:opacity-100 hover:opacity-100 active:opacity-100"
+                                    onClick={() => {
+                                        if (surroundingTracks.length > 0) {
+                                            playTracks(surroundingTracks, track)
+                                        } else {
+                                            playTrack(track)
+                                        }
+                                    }}
+                                />
+                            </AccentProvider>
+                        </>
+                    )}
                 </div>
 
-                <span className="truncate font-medium">
-                    {track.title}
-                    {track.features.length > 0 && (
-                        <>
-                            {" "}
-                            (feat.{" "}
-                            <ArtistsList
-                                className="text-accent-300/80 font-medium"
-                                artists={track.features}
-                            />
-                            )
-                        </>
-                    )}
-                    {track.remixers.length > 0 && (
-                        <>
-                            {" "}
-                            (
-                            <ArtistsList
-                                className="text-accent-300/80 font-medium"
-                                artists={track.remixers}
-                            />{" "}
-                            remix)
-                        </>
-                    )}
-                </span>
+                <button
+                    className="grid items-center gap-2 overflow-hidden pl-2 text-left text-sm"
+                    style={{
+                        gridTemplateColumns: `1.5fr ${tracklistColumnsToGridTemplate(columns)} 64px auto`,
+                    }}
+                    onClick={(e) => {
+                        selectTrack(track, {
+                            ctrlKey: e.ctrlKey,
+                            shiftKey: e.shiftKey,
+                        })
+                    }}
+                    onDoubleClick={() => {
+                        clearTrackSelection()
+                        if (surroundingTracks.length > 0) {
+                            playTracks(surroundingTracks, track)
+                        } else {
+                            playTrack(track)
+                        }
+                    }}
+                >
+                    <span className="truncate font-medium">
+                        {track.title}
+                        {track.features.length > 0 && (
+                            <>
+                                {" "}
+                                (feat.{" "}
+                                <ArtistsList
+                                    className="text-accent-300/80 font-medium"
+                                    artists={track.features}
+                                />
+                                )
+                            </>
+                        )}
+                        {track.remixers.length > 0 && (
+                            <>
+                                {" "}
+                                (
+                                <ArtistsList
+                                    className="text-accent-300/80 font-medium"
+                                    artists={track.remixers}
+                                />{" "}
+                                remix)
+                            </>
+                        )}
+                    </span>
 
-                {columns.map((column) => (
-                    <Fragment key={column}>{columnMarkup[column]}</Fragment>
-                ))}
+                    {columns.map((column) => (
+                        <Fragment key={column}>{columnMarkup[column]}</Fragment>
+                    ))}
 
-                <span className="pr-3 text-right font-mono text-gray-400">
-                    <Duration>{track.duration}</Duration>
-                </span>
+                    <span className="pr-3 text-right font-mono text-gray-400">
+                        <Duration>{track.duration}</Duration>
+                    </span>
+                </button>
 
                 <div className="flex gap-1">
                     <Dropdown
