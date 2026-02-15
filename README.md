@@ -7,7 +7,7 @@
 
 # Venus
 
-Music server me and maybe you!
+Music server for me and maybe you!
 
 Previously named "CUBE" as it was supposed to combine a bunch of different services under a single UI. I decided to reduce the scope and have it handle music specifically, so Venus it is.
 
