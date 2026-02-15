@@ -21,8 +21,8 @@ import { IconSymbol } from "@/app/components/icon/icon-symbol"
 import { SettingsSection } from "@/app/settings/components/settings-section"
 import { AddFolderButton } from "@/app/settings/venus/library/folders/add-folder-button"
 import { DeleteFolderButton } from "@/app/settings/venus/library/folders/delete-folder-button"
-import { venusErrorMapper } from "@/app/venus/venus-error-mapper"
-import { VenusFetchTags } from "@/app/venus/venus-fetch-tags"
+import { venusErrorMapper } from "@/app/venus-error-mapper"
+import { VenusFetchTags } from "@/app/venus-fetch-tags"
 import { Fragment } from "react"
 
 export const FoldersSection = async () => {

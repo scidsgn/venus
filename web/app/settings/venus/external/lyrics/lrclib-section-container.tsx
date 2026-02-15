@@ -18,8 +18,8 @@ import { actionFailed } from "@/app/action/action"
 import { ActionErrorMessage } from "@/app/action/action-error-message"
 import { actionFromFetch } from "@/app/action/fetch-action"
 import { LrclibSection } from "@/app/settings/venus/external/lyrics/lrclib-section"
-import { venusErrorMapper } from "@/app/venus/venus-error-mapper"
-import { VenusFetchTags } from "@/app/venus/venus-fetch-tags"
+import { venusErrorMapper } from "@/app/venus-error-mapper"
+import { VenusFetchTags } from "@/app/venus-fetch-tags"
 
 export const LrclibSectionContainer = async () => {
     const result = await actionFromFetch(

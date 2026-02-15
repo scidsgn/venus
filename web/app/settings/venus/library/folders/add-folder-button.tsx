@@ -19,7 +19,7 @@ import { useAction } from "@/app/action/use-action"
 import { Popover } from "@/app/components/popover/popover"
 import { DirectoryBrowser } from "@/app/directory-browser/directory-browser"
 import { addFolderAction } from "@/app/settings/venus/library/folders/folder-actions"
-import { venusErrorMapper } from "@/app/venus/venus-error-mapper"
+import { venusErrorMapper } from "@/app/venus-error-mapper"
 
 export const AddFolderButton = () => {
     const addFolder = useAction(addFolderAction, venusErrorMapper)

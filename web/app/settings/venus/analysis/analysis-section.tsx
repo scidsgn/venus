@@ -21,7 +21,7 @@ import { Callout } from "@/app/components/callout/callout"
 import { Checkbox } from "@/app/components/checkbox"
 import { SettingsSection } from "@/app/settings/components/settings-section"
 import { updateMusicalAnalysisLevelAction } from "@/app/settings/venus/analysis/analysis-actions"
-import { venusErrorMapper } from "@/app/venus/venus-error-mapper"
+import { venusErrorMapper } from "@/app/venus-error-mapper"
 
 type AnalysisSectionProps = {
     settings: MusicalAnalysisSettingsDto

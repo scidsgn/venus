@@ -18,7 +18,7 @@
 import { venusUpdateScanSettings } from "@/apis/venus"
 import { actionFromResponse } from "@/app/action/action"
 import { ActionOutcome } from "@/app/action/action-types"
-import { VenusFetchTags } from "@/app/venus/venus-fetch-tags"
+import { VenusFetchTags } from "@/app/venus-fetch-tags"
 import { updateTag } from "next/cache"
 
 export async function updateArtistSplittingAction(split: boolean) {

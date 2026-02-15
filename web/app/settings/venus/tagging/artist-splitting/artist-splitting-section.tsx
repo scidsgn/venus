@@ -20,7 +20,7 @@ import { useAction } from "@/app/action/use-action"
 import { Checkbox } from "@/app/components/checkbox"
 import { SettingsSection } from "@/app/settings/components/settings-section"
 import { updateArtistSplittingAction } from "@/app/settings/venus/tagging/tagging-actions"
-import { venusErrorMapper } from "@/app/venus/venus-error-mapper"
+import { venusErrorMapper } from "@/app/venus-error-mapper"
 
 type ArtistSplittingSectionProps = {
     settings: ScanSettingsDto

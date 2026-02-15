@@ -19,7 +19,7 @@ import { useAction } from "@/app/action/use-action"
 import { Button } from "@/app/components/button/button"
 import { Input } from "@/app/components/input/input"
 import { insertNoSplitEntryAction } from "@/app/settings/venus/tagging/no-split/no-split-actions"
-import { venusErrorMapper } from "@/app/venus/venus-error-mapper"
+import { venusErrorMapper } from "@/app/venus-error-mapper"
 import { useState } from "react"
 
 export const InsertNoSplitEntry = () => {

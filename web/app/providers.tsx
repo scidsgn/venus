@@ -1,6 +1,6 @@
 /*
  * CUBE
- * Copyright (C) 2025  scidsgn
+ * Copyright (C) 2025-2026  scidsgn
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU Affero General Public License as published
  * by the Free Software Foundation, either version 3 of the License, or
@@ -14,11 +14,11 @@
  */
 
 import { Toasts } from "@/app/components/toast/toasts"
-import { AudioContextProvider } from "@/app/venus/playback/audio-context"
-import { PlayerProvider } from "@/app/venus/playback/player-context"
+import { AudioContextProvider } from "@/app/playback/audio-context"
+import { PlayerProvider } from "@/app/playback/player-context"
 import { NuqsAdapter } from "nuqs/adapters/next/app"
 import { ReactNode } from "react"
-import { PlaylistContextProvider } from "./venus/playlists/context/playlist-context"
+import { PlaylistContextProvider } from "@/app/playlists/context/playlist-context"
 
 export const Providers = ({ children }: { children?: ReactNode }) => (
     <NuqsAdapter>

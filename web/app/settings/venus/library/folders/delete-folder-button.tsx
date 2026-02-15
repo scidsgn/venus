@@ -19,7 +19,7 @@ import { FolderDto } from "@/apis/venus"
 import { useAction } from "@/app/action/use-action"
 import { DestructiveButton } from "@/app/components/button/destructive-button"
 import { removeFolderAction } from "@/app/settings/venus/library/folders/folder-actions"
-import { venusErrorMapper } from "@/app/venus/venus-error-mapper"
+import { venusErrorMapper } from "@/app/venus-error-mapper"
 
 export const DeleteFolderButton = ({ folder }: { folder: FolderDto }) => {
     const removeFolder = useAction(removeFolderAction, venusErrorMapper)

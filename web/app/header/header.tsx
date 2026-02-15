@@ -15,10 +15,10 @@
 
 import { AccountDropdown } from "@/app/header/account-dropdown/account-dropdown"
 import { AppPicker } from "@/app/header/app-picker"
-import { HeaderSlot } from "@/app/header/header-context"
-import { NowPlayingContainer } from "@/app/venus/now-playing/bar/now-playing-container"
+import { NowPlayingContainer } from "@/app/now-playing/bar/now-playing-container"
+import { HeaderLinks } from "@/app/header/header-links"
 
-export const Header = async () => {
+export const Header = () => {
     return (
         <nav className="pointer-events-none fixed z-50 flex w-full items-start gap-6 p-6">
             <div className="pointer-events-auto flex w-64 justify-between gap-1">
@@ -36,9 +36,7 @@ export const Header = async () => {
                 <AppPicker />
             </div>
 
-            <div className="pointer-events-auto flex gap-1 bg-gray-950/80 backdrop-blur-2xl">
-                <HeaderSlot />
-            </div>
+            <HeaderLinks />
 
             <div className="grow" />
 

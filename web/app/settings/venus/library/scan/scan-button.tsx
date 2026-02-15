@@ -18,7 +18,7 @@ import { Button } from "@/app/components/button/button"
 import { DestructiveButton } from "@/app/components/button/destructive-button"
 import { interruptAction } from "@/app/settings/venus/library/scan/interrupt-action"
 import { rescanAction } from "@/app/settings/venus/library/scan/rescan-action"
-import { venusErrorMapper } from "@/app/venus/venus-error-mapper"
+import { venusErrorMapper } from "@/app/venus-error-mapper"
 
 type ScanButtonProps = {
     onFail: () => void

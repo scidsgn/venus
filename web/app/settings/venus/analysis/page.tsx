@@ -19,8 +19,8 @@ import { ActionErrorMessage } from "@/app/action/action-error-message"
 import { actionFromFetch } from "@/app/action/fetch-action"
 import { adminPage } from "@/app/auth/admin-page"
 import { AnalysisSection } from "@/app/settings/venus/analysis/analysis-section"
-import { venusErrorMapper } from "@/app/venus/venus-error-mapper"
-import { VenusFetchTags } from "@/app/venus/venus-fetch-tags"
+import { venusErrorMapper } from "@/app/venus-error-mapper"
+import { VenusFetchTags } from "@/app/venus-fetch-tags"
 
 const VenusAnalysisSettingsPage = adminPage(async () => {
     const result = await actionFromFetch(

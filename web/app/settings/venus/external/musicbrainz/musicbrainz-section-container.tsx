@@ -18,8 +18,8 @@ import { actionFailed } from "@/app/action/action"
 import { ActionErrorMessage } from "@/app/action/action-error-message"
 import { actionFromFetch } from "@/app/action/fetch-action"
 import { MusicbrainzSection } from "@/app/settings/venus/external/musicbrainz/musicbrainz-section"
-import { venusErrorMapper } from "@/app/venus/venus-error-mapper"
-import { VenusFetchTags } from "@/app/venus/venus-fetch-tags"
+import { venusErrorMapper } from "@/app/venus-error-mapper"
+import { VenusFetchTags } from "@/app/venus-fetch-tags"
 
 export const MusicbrainzSectionContainer = async () => {
     const result = await actionFromFetch(

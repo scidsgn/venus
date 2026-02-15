@@ -15,9 +15,8 @@
 
 import { setupClients } from "@/apis/client-setup"
 import { Header } from "@/app/header/header"
-import { HeaderContextProvider } from "@/app/header/header-context"
 import { Providers } from "@/app/providers"
-import { NowPlayingPanel } from "@/app/venus/now-playing/panel/now-playing-panel"
+import { NowPlayingPanel } from "@/app/now-playing/panel/now-playing-panel"
 import type { Metadata } from "next"
 import { ReactNode } from "react"
 
@@ -41,16 +40,14 @@ export default function RootLayout({
             <body
                 className={`${jetbrainsMono.variable} ${publicSans.variable} antialiased`}
             >
-                <HeaderContextProvider>
-                    <Providers>
-                        <Header />
-                        <main className="fixed inset-0 flex min-w-0">
-                            <div className="relative grow">{children}</div>
+                <Providers>
+                    <Header />
+                    <main className="fixed inset-0 flex min-w-0">
+                        <div className="relative grow">{children}</div>
 
-                            <NowPlayingPanel />
-                        </main>
-                    </Providers>
-                </HeaderContextProvider>
+                        <NowPlayingPanel />
+                    </main>
+                </Providers>
             </body>
         </html>
     )

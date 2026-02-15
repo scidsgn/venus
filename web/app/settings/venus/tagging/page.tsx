@@ -21,7 +21,7 @@ import { adminPage } from "@/app/auth/admin-page"
 import { ArtistSplittingSection } from "@/app/settings/venus/tagging/artist-splitting/artist-splitting-section"
 import { NoSplitSection } from "@/app/settings/venus/tagging/no-split/no-split-section"
 import { TrackFeaturesSection } from "@/app/settings/venus/tagging/track-features/track-features-section"
-import { venusErrorMapper } from "@/app/venus/venus-error-mapper"
+import { venusErrorMapper } from "@/app/venus-error-mapper"
 
 const VenusTaggingSettingsPage = adminPage(async () => {
     const result = await actionFromFetch(

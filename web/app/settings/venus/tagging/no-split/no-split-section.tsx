@@ -21,8 +21,8 @@ import { Callout } from "@/app/components/callout/callout"
 import { SettingsSection } from "@/app/settings/components/settings-section"
 import { InsertNoSplitEntry } from "@/app/settings/venus/tagging/no-split/insert-no-split-entry"
 import { NoSplitEntry } from "@/app/settings/venus/tagging/no-split/no-split-entry"
-import { venusErrorMapper } from "@/app/venus/venus-error-mapper"
-import { VenusFetchTags } from "@/app/venus/venus-fetch-tags"
+import { venusErrorMapper } from "@/app/venus-error-mapper"
+import { VenusFetchTags } from "@/app/venus-fetch-tags"
 
 export const NoSplitSection = async () => {
     const result = await actionFromFetch(
