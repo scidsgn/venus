@@ -1,15 +1,17 @@
 > [!IMPORTANT]
 > 🚧 **UNDER HEAVY DEVELOPMENT** 🚧
 > 
-> CUBE is *not* ready for primetime yet. Expect bugs, schema changes, and movements happening left and right.
+> Venus is *not* ready for primetime yet. Expect bugs, schema changes, and movements happening left and right.
 > 
 > Deploy at your own risk.
 
-# CUBE
+# Venus
 
-NAS software?
+Music server me and maybe you!
 
-![CUBE screenshot](assets/cube-screenshot.png)
+Previously named "CUBE" as it was supposed to combine a bunch of different services under a single UI. I decided to reduce the scope and have it handle music specifically, so Venus it is.
+
+![Venus screenshot](assets/cube-screenshot.png)
 
 ## Deployment
 
